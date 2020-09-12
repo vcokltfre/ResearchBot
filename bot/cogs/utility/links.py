@@ -1,4 +1,5 @@
 import pyourls3
+import whois
 import discord
 from discord.ext import commands
 
@@ -46,6 +47,19 @@ class Links(commands.Cog):
                 await ctx.send("Stats for shortened URL:```"+urls['shorturl']+"```Long URL:```"+urls['url']+"```Clicks:```"+urls['clicks']+"```Created:```"+urls['timestamp']+"```")
             except:
                 await ctx.send("The keyword/shorturl probably doesn't exist! `"+url+"`", delete_after=10)
+
+    @commands.command(name="whois")
+    @commands.has_any_role("Administrator", "Moderator")
+    async def whois_lookup(self, ctx: commands.Context, domain: str):
+        domain = whois.query(domain)
+
+        expiry = f"{domain.expiration_date.year}/{domain.expiration_date.month}/{domain.expiration_date.day}"
+        creation = f"{domain.creation_date.year}/{domain.creation_date.month}/{domain.creation_date.day}"
+        registrar = domain.registrar
+        name = domain.name
+
+        msg = f"WHOIS lookup for {name}:\nRegistrar: {registrar}\nCreation date: {creation}\nExpiry date: {expiry}\n"
+        await ctx.send(msg)
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
