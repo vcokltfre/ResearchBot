@@ -13,6 +13,7 @@ log_type = 'text'
 token = 'your discord bot token'
 hook = 'logging webhook url'
 dev_ids = [your_discord_id]
+guild = your_guild_id
 
 nick_request_channel_id = channel_id
 nick_accept_channel_id = channel_id

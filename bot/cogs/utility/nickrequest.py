@@ -20,8 +20,8 @@ class Nickrequest(commands.Cog):
     @commands.cooldown(1, command_timeout, commands.BucketType.user)
     async def nick(self, ctx: commands.Context, *, nick):
         channel = self.bot.get_channel(accept_channel_id)
-        # this looks if the request is valid
 
+        # this looks if the request is valid
         if not nick:
             message = await ctx.send(f'{ctx.author.mention}, please mention a nick to change to.')
             await asyncio.sleep(5)
@@ -59,20 +59,25 @@ class Nickrequest(commands.Cog):
 
     @commands.Cog.listener(name="on_raw_reaction_add")
     async def on_raw_reaction_add(self, payload):
+        # this rules out other reactions
         if payload.channel_id != accept_channel_id:
             return
         if payload.user_id == self.bot.user.id:
             return
 
+        # this get the channel, user, emoji and message
         channel = self.bot.get_channel(id=payload.channel_id)
         msg = await channel.fetch_message(payload.message_id)
         emoji = payload.emoji.name
+
         server = self.bot.get_guild(msg.guild.id)
         user = server.get_member(int(msg.embeds[0].footer.text))
+
         nickname = msg.embeds[0].description
         nickname = nickname.replace(f"{user.name} wants their nickname to be changed to '", "")
         nickname = nickname.replace("'.", "")
 
+        # this applies the nickname or notifies the user of the denied request
         if emoji == '✅':
             await user.edit(nick=nickname)
             await asyncio.sleep(3)
@@ -85,6 +90,7 @@ class Nickrequest(commands.Cog):
     @nick.error
     async def nick_error(self, ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
+            # this sends an error if the command is used too often
             msg = 'This command is ratelimited, please try again in {:.2f}s'.format(error.retry_after)
             message = await ctx.channel.send(msg)
             await asyncio.sleep(5)
