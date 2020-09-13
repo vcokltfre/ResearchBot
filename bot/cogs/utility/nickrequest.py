@@ -10,10 +10,6 @@ reaction_timeout = 300
 command_timeout = 600
 
 
-def check(reaction, user):
-    return user.id not in ['h'] and bool(str(reaction.emoji) == '✅' or str(reaction.emoji) == '❌')
-
-
 class Nickrequest(commands.Cog):
 
     def __init__(self, bot: Bot):
