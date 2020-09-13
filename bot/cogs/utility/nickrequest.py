@@ -3,11 +3,11 @@ from discord.ext import commands
 import asyncio
 
 from bot.bot import Bot
+from config.config import nick_request_channel_id as request_channel_id
+from config.config import nick_accept_channel_id as accept_channel_id
 
 reaction_timeout = 300
 command_timeout = 600
-request_channel_id =
-accept_channel_id =
 
 
 def check(reaction, user):
