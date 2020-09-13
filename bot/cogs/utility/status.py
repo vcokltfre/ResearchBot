@@ -3,6 +3,7 @@ from discord.ext import commands
 
 from bot.bot import Bot
 from bot.utils.checks import is_dev
+from config.config import guild
 
 
 class Status(commands.Cog):
@@ -51,7 +52,7 @@ class Status(commands.Cog):
     # Event listeners
     @commands.Cog.listener()
     async def on_ready(self):
-        self.guild = self.bot.get_guild(720723932738486323)
+        self.guild = self.bot.get_guild(guild)
         await self._auto()
 
     @commands.Cog.listener()
