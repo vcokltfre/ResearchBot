@@ -83,7 +83,7 @@ class Nickrequest(commands.Cog):
             await asyncio.sleep(3)
             await msg.delete()
         elif emoji == '❌':
-            await user.send("Your nickname change request was denied.")
+            await user.send(f"Your nickname change to {nickname}, was denied.")
             await asyncio.sleep(3)
             await msg.delete()
 
