@@ -33,7 +33,7 @@ class report(commands.Cog):
         if len(reported_msg.content) < 1024:
             embed.add_field(name="Reported Message Content", value=f"{reported_msg.content}")
         else:
-            embed.add_field(name="Reported Message Content (1)", value=f"{reported_msg.content[:1024]}")
+            embed.add_field(name="Reported Message Content (1)", value=f"{reported_msg.content[:1025]}")
             embed.add_field(name="Reported Message Content (2)", value=f"{reported_msg.content[1025:]}")
         embed.add_field(name="Reported by:", value=f"{ctx.author.mention}")
         embed.add_field(name="Link to message:", value=f"{reported_msg.jump_url}")
@@ -68,10 +68,12 @@ class report(commands.Cog):
             field_reported_msg_content_2 = easy_embed['fields'][2]['value']
         field_reporter = easy_embed['fields'][-2]['value']
         field_url = easy_embed['fields'][-1]['value']
+        channel_id = field_url.split('/')[-2]
+        message_id = field_url.split('/')[-1]
 
-        rp_channel = server.get_channel(int(field_url[-37:-19]))
+        rp_channel = server.get_channel(int(channel_id))
         try:
-            rp_message = await rp_channel.fetch_message(int(field_url[-18:]))
+            rp_message = await rp_channel.fetch_message(int(message_id))
         except discord.NotFound:
             embed = discord.Embed(title="Reported Message:", color=15105570)
             embed.set_author(name="Warning: Message couldn't be found")
