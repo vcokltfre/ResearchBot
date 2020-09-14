@@ -17,7 +17,7 @@ class Nickrequest(commands.Cog):
         self.guild = None
 
     @commands.command(name="nick")
-    # @commands.cooldown(1, command_timeout, commands.BucketType.user)
+    @commands.cooldown(1, command_timeout, commands.BucketType.user)
     async def nick(self, ctx: commands.Context, *, nick):
         acc_channel = self.bot.get_channel(accept_channel_id)
         nick = str(nick)
