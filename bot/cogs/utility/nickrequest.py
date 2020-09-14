@@ -100,7 +100,7 @@ class Nickrequest(commands.Cog):
             try:
                 await user.send(f"Your nickname change to {nickname}, was denied.")
             except discord.errors.Forbidden:
-                pass
+                self.bot.logger.warn("Nickname Request: User couldn't be DMed.")
 
 
     @nick.error
