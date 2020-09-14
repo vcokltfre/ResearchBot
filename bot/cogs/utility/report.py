@@ -76,7 +76,7 @@ class report(commands.Cog):
             embed = discord.Embed(title="Reported Message:", color=15105570)
             embed.set_author(name="Warning: Message couldn't be found")
             embed.add_field(name="Reported Message Author", value=f"{field_reported_msg_author}")
-            if field_reported_msg_content:
+            if easy_embed['fields'][1]['name'] == "Reported Message Content":
                 embed.add_field(name="Reported Message Content", value=f"{field_reported_msg_content}")
             else:
                 embed.add_field(name="Reported Message Content (1)", value=f"{field_reported_msg_content_1}")
@@ -90,7 +90,7 @@ class report(commands.Cog):
 
         embed = discord.Embed(title="Reported Message:", color=3066993)
         embed.add_field(name="Reported Message Author", value=f"{field_reported_msg_author}")
-        if field_reported_msg_content:
+        if easy_embed['fields'][1]['name'] == "Reported Message Content":
             embed.add_field(name="Reported Message Content", value=f"{field_reported_msg_content}")
         else:
             embed.add_field(name="Reported Message Content (1)", value=f"{field_reported_msg_content_1}")
