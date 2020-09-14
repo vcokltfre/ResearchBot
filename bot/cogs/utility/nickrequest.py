@@ -1,13 +1,13 @@
 import discord
 from discord.ext import commands
 import asyncio
+import string
 
 from bot.bot import Bot
 from config.config import nick_request_channel_id as request_channel_id
 from config.config import nick_accept_channel_id as accept_channel_id
 
 command_timeout = 600
-allowed_list = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;?@[\\]^_`{|}~ '
 
 
 class Nickrequest(commands.Cog):
@@ -21,12 +21,10 @@ class Nickrequest(commands.Cog):
     async def nick(self, ctx: commands.Context, *, nick):
         acc_channel = self.bot.get_channel(accept_channel_id)
         nick = str(nick)
-        nick.replace('"', '\"')
-        nick.replace("'", "\'")
 
         # this looks if the request is valid
         for char in nick:
-            if not char in allowed_list:
+            if not char in string.printable:
                 await ctx.send(f'{ctx.author.mention}, please only use allowed characters', delete_after=5)
                 await ctx.message.delete()
                 return
@@ -99,7 +97,11 @@ class Nickrequest(commands.Cog):
             embed.add_field(name="Denied by", value=f"{reactor.mention}")
             await msg.edit(embed=embed)
             await msg.clear_reactions()
-            await user.send(f"Your nickname change to {nickname}, was denied.")
+            try:
+                await user.send(f"Your nickname change to {nickname}, was denied.")
+            except discord.errors.Forbidden:
+                pass
+
 
     @nick.error
     async def nick_error(self, ctx, error):
