@@ -4,6 +4,7 @@ import asyncio
 
 from bot.bot import Bot
 
+stickbug_immune = [244459328847872000, 297045071457681409]
 
 class fun(commands.Cog):
 
@@ -14,7 +15,11 @@ class fun(commands.Cog):
     @commands.command(name="stickbug")
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def stickbug(self, ctx, user: discord.Member):
-        await ctx.send(f"https://stickb.ug/d/{user.id}")
+        if user.id in stickbug_immune and ctx.author.id not in stickbug_immune:
+            await ctx.send(f"Ha you thought!\n"
+                           f"https://stickb.ug/d/{ctx.author.id}")
+        else:
+            await ctx.send(f"https://stickb.ug/d/{user.id}")
         
     @stickbug.error
     async def nick_error(self, ctx, error):
