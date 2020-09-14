@@ -87,7 +87,6 @@ class report(commands.Cog):
             embed.add_field(name="Link to message:", value=f"{field_url}")
             await msg.edit(embed=embed)
             await msg.clear_reactions()
-            pass
             return
 
         embed = discord.Embed(title="Reported Message:", color=3066993)
