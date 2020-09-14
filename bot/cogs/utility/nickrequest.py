@@ -102,12 +102,11 @@ class Nickrequest(commands.Cog):
             except discord.errors.Forbidden:
                 self.bot.logger.warn("Nickname Request: User couldn't be DMed.")
 
-
     @nick.error
     async def nick_error(self, ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
             # this sends an error if the command is used too often
-            msg = 'This command is ratelimited, please try again in {:.2f}s'.format(error.retry_after)
+            msg = f'{ctx.author.mention}, this command is ratelimited, please try again in {error.retry_after}s.'
             await ctx.send(msg, delete_after=5)
             await asyncio.sleep(5)
             await ctx.message.delete()
