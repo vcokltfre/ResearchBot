@@ -18,40 +18,33 @@ class Nickrequest(commands.Cog):
 
     @commands.command(name="nick")
     @commands.cooldown(1, command_timeout, commands.BucketType.user)
-    async def nick(self, ctx: commands.Context, *, nick):
-        channel = self.bot.get_channel(accept_channel_id)
+    async def nick(self, ctx: commands.Context, *, nick: str):
+        rq_channel = self.bot.get_channel(accept_channel_id)
 
         # this looks if the request is valid
         if not nick:
-            message = await ctx.send(f'{ctx.author.mention}, please mention a nick to change to.')
-            await asyncio.sleep(5)
+            await ctx.send(f'{ctx.author.mention}, please mention a nick to change to.',delete_after=5)
             await ctx.message.delete()
-            await message.delete()
             return
-
-        nick = str(nick)
-
         if ctx.channel.id != request_channel_id:
-            message = await ctx.send(f'{ctx.author.mention}, please use the correct channel.')
-            await asyncio.sleep(5)
+            await ctx.send(f'{ctx.author.mention}, please use the correct channel.',delete_after=5)
             await ctx.message.delete()
-            await message.delete()
             return
 
         if len(nick) > 32:
-            message = await ctx.send(f'{ctx.author.mention}, please mention a nick with 32 characters or less.')
-            await asyncio.sleep(5)
+            message = await ctx.send(f'{ctx.author.mention}, please mention a nick with 32 characters or less.',delete_after=5)
             await ctx.message.delete()
-            await message.delete()
             return
 
         # this sends the embed to the selected channel
-        embed = discord.Embed(description=f"{ctx.author.name} wants their nickname to be changed to '{nick}'.",
-                              color=0x00ff00)
+        embed = discord.Embed(title="Nickname Change Request",color=0x00ff00)
+        embed.set_field(name="Current Nick",value=f"{ctx.author.nick}")
+        embed.set_field(name="Requested Nick",value=f"{nick}")
         embed.set_author(name=f"{ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url)
+        embed.set_field(name="Requester",value="{ctx.author.mention}")
         embed.set_footer(text=f"{ctx.author.id}")
         await ctx.message.add_reaction("✅")
-        message = await channel.send(embed=embed)
+        message = await rq_channel.send(embed=embed)
         await message.add_reaction("✅")
         await message.add_reaction("❌")
         await asyncio.sleep(10)
@@ -71,11 +64,11 @@ class Nickrequest(commands.Cog):
         emoji = payload.emoji.name
 
         server = self.bot.get_guild(msg.guild.id)
-        user = server.get_member(int(msg.embeds[0].footer.text))
-
-        nickname = msg.embeds[0].description
-        nickname = nickname.replace(f"{user.name} wants their nickname to be changed to '", "")
-        nickname = nickname.replace("'.", "")
+        
+        easy_embed = msg.embeds[0].to_dict()
+        user = server.get_member(int(easy_embed['fields'][2]['value'][2:-1]))
+        nickname = easy_embed['fields'][1]['value']
+        
 
         # this applies the nickname or notifies the user of the denied request
         if emoji == '✅':
