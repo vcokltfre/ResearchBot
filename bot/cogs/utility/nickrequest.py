@@ -6,8 +6,8 @@ from bot.bot import Bot
 from config.config import nick_request_channel_id as request_channel_id
 from config.config import nick_accept_channel_id as accept_channel_id
 
-reaction_timeout = 300
 command_timeout = 600
+allowed_list = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;?@[\\]^_`{|}~ '
 
 
 class Nickrequest(commands.Cog):
@@ -17,11 +17,19 @@ class Nickrequest(commands.Cog):
         self.guild = None
 
     @commands.command(name="nick")
-    @commands.cooldown(1, command_timeout, commands.BucketType.user)
-    async def nick(self, ctx: commands.Context, *, nick: str):
+    # @commands.cooldown(1, command_timeout, commands.BucketType.user)
+    async def nick(self, ctx: commands.Context, *, nick):
         acc_channel = self.bot.get_channel(accept_channel_id)
+        nick = str(nick)
+        nick.replace('"', '\"')
+        nick.replace("'", "\'")
 
         # this looks if the request is valid
+        for char in nick:
+            if not char in allowed_list:
+                await ctx.send(f'{ctx.author.mention}, please only use allowed characters', delete_after=5)
+                await ctx.message.delete()
+                return
         if not nick:
             await ctx.send(f'{ctx.author.mention}, please mention a nick to change to.', delete_after=5)
             await ctx.message.delete()
