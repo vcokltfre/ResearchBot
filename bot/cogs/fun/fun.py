@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import asyncio
 
 from bot.bot import Bot
 
@@ -20,10 +21,9 @@ class fun(commands.Cog):
         if isinstance(error, commands.CommandOnCooldown):
             # this sends an error if the command is used too often
             msg = 'This command is ratelimited, please try again in {:.2f}s'.format(error.retry_after)
-            message = await ctx.channel.send(msg)
+            await ctx.send(msg, delete_after=5)
             await asyncio.sleep(5)
             await ctx.message.delete()
-            await message.delete()
         else:
             raise error
 
