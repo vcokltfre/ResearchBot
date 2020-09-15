@@ -1,10 +1,12 @@
 import discord
+import string
 from discord.ext import commands
-import asyncio
 
 from bot.bot import Bot
 
 stickbug_immune = [244459328847872000, 297045071457681409]
+rgb_people = [256251362260549632, 738981683516145785]
+
 
 class fun(commands.Cog):
 
@@ -31,6 +33,15 @@ class fun(commands.Cog):
             await ctx.message.delete()
         else:
             raise error
+
+    def make_ascii(self, text: str):
+        return ''.join([c for c in text if c in string.printable])
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        if message.author.id in rgb_people:
+            if "rgb" in self.make_ascii(message.content.lower()):
+                await message.channel.send("RGB makes your PC faster")
 
 
 def setup(bot: Bot):
