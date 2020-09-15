@@ -19,7 +19,7 @@ class Nickrequest(commands.Cog):
     @commands.command(name="nick")
     # @commands.cooldown(1, command_timeout, commands.BucketType.user)
     async def nick(self, ctx: commands.Context, *, nick):
-        acc_channel = self.bot.get_channel(accept_channel_id)
+        acc_channel = self.bot.get_channel(754818272528040026)
         nick = str(nick)
         nick.replace('"', '\"')
         nick.replace("'", "\'")
@@ -45,15 +45,17 @@ class Nickrequest(commands.Cog):
             return
 
         # this sends the embed to the selected channel
-        embed = discord.Embed(title="Nickname Change Request", color=8359053)
-        embed.add_field(name="Current Nick", value=f"{ctx.author.nick}")
-        embed.add_field(name="Requested Nick", value=f"{nick}")
+        embed = discord.Embed(title="Nickname Change Request", color=0x00ff00)
         embed.set_author(name=f"{ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url)
-        embed.add_field(name="Requester", value=f"{ctx.author.mention}")
-        await ctx.message.add_reaction("✅")
-        message = await acc_channel.send(embed=embed)
-        await message.add_reaction("✅")
-        await message.add_reaction("❌")
+        embed.add_field(name="Current Nickname",value=f'{ctx.author.nick if ctx.author.nick else "Unassigned."}')
+        embed.add_field(name="Requested Nickname",value=f'{nick}')
+        embed.add_field(name="Requester",value=f"{ctx.author.mention}")
+        embed.add_field(name="Message ID",value=f"{ctx.message.id}")
+        embed.add_field(name="Channel ID",value=f"{ctx.channel.id}")
+        embed.add_field(name="Jump to",value=f"{ctx.message.jump_url}", inline=False)
+        this = await channel.send(embed=embed)
+        await this.add_reaction("✅")
+        await this.add_reaction("❌")
 
     @commands.Cog.listener(name="on_raw_reaction_add")
     async def there_reaction(self, requests_R):
