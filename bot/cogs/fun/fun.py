@@ -1,7 +1,9 @@
 import discord
-from discord.ext import commands
 import asyncio
+import aiohttp
 import string
+from discord.ext import commands
+from pathlib import Path
 
 from bot.bot import Bot
 
@@ -14,13 +16,21 @@ class fun(commands.Cog):
         self.bot = bot
         self.guild = None
 
+        if not Path("./temp").exists():
+            Path("./temp").mkdir()
+
     def make_ascii(self, text: str):
         return ''.join([c for c in text if c in string.printable])
 
     @commands.command(name="stickbug")
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def stickbug(self, ctx, user: discord.Member):
-        await ctx.send(f"https://stickb.ug/d/{user.id}")
+        async with ctx.channel.typing():
+            async with aiohttp.ClientSession() as session:
+                async with session.get(f"https://stickb.ug/d/{user.id}") as resp:
+                    with Path("./temp/sb.mp4").open('wb') as f:
+                        f.write(resp.content)
+            await ctx.send(file=discord.File("./temp/sb.mp4"))
 
     @stickbug.error
     async def nick_error(self, ctx, error):
