@@ -33,7 +33,7 @@ class fun(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.author.id in rgb_people:
-            if "rgb" in message.content.lower():
+            if "rgb" in message.content.lower().strip("‍"):
                 await message.channel.send("RGB makes your PC faster")
 
 
