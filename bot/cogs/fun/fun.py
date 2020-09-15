@@ -1,6 +1,7 @@
 import discord
 import asyncio
 import aiohttp
+import aiofiles
 import string
 from discord.ext import commands
 from pathlib import Path
@@ -28,8 +29,9 @@ class fun(commands.Cog):
         async with ctx.channel.typing():
             async with aiohttp.ClientSession() as session:
                 async with session.get(f"https://stickb.ug/d/{user.id}") as resp:
-                    with Path("./temp/sb.mp4").open('wb') as f:
-                        f.write(resp.content)
+                    f = await aiofiles.open('./temp/db.mp4', mode='wb')
+                    await f.write(await resp.read())
+                    await f.close()
             await ctx.send(file=discord.File("./temp/sb.mp4"))
 
     @stickbug.error
