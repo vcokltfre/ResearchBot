@@ -19,17 +19,13 @@ class Nickrequest(commands.Cog):
     @commands.command(name="nick")
     # @commands.cooldown(1, command_timeout, commands.BucketType.user)
     async def nick(self, ctx: commands.Context, *, nick):
-        acc_channel = self.bot.get_channel(754818272528040026)
+        acc_channel = self.bot.get_channel(accept_channel_id)
         nick = str(nick)
         nick.replace('"', '\"')
         nick.replace("'", "\'")
 
-        # this looks if the request is valid
-        for char in nick:
-            if not char in allowed_list:
-                await ctx.send(f'{ctx.author.mention}, please only use allowed characters', delete_after=5)
-                await ctx.message.delete()
-                return
+        nick = ''.join(allowed_character for allowed_character in nick if allowed_character in allowed_list)
+        
         if not nick:
             await ctx.send(f'{ctx.author.mention}, please mention a nick to change to.', delete_after=5)
             await ctx.message.delete()
@@ -53,15 +49,15 @@ class Nickrequest(commands.Cog):
         embed.add_field(name="Message ID",value=f"{ctx.message.id}")
         embed.add_field(name="Channel ID",value=f"{ctx.channel.id}")
         embed.add_field(name="Jump to",value=f"{ctx.message.jump_url}", inline=False)
-        this = await channel.send(embed=embed)
+        this = await acc_channel.send(embed=embed)
         await this.add_reaction("✅")
         await this.add_reaction("❌")
 
     @commands.Cog.listener(name="on_raw_reaction_add")
     async def there_reaction(self, requests_R):
-        if requests_R.channel_id != 754818272528040026 or requests_R.user_id == self.bot.user.id:
+        if requests_R.channel_id != accept_channel_id or requests_R.user_id == self.bot.user.id:
             return
-        added_message = await self.bot.get_channel(754818272528040026).fetch_message(requests_R.message_id)
+        added_message = await self.bot.get_channel(request_channel_id).fetch_message(requests_R.message_id)
         reaction_ = str(requests_R.emoji.name)
         current_guild = self.bot.get_guild(requests_R.guild_id)
         
