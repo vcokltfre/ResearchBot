@@ -24,12 +24,8 @@ class Nickrequest(commands.Cog):
         nick.replace('"', '\"')
         nick.replace("'", "\'")
 
-        # this looks if the request is valid
-        for char in nick:
-            if not char in allowed_list:
-                await ctx.send(f'{ctx.author.mention}, please only use allowed characters', delete_after=5)
-                await ctx.message.delete()
-                return
+        nick = ''.join(allowed_character for allowed_character in nick if allowed_character in allowed_list)
+        
         if not nick:
             await ctx.send(f'{ctx.author.mention}, please mention a nick to change to.', delete_after=5)
             await ctx.message.delete()
@@ -45,61 +41,56 @@ class Nickrequest(commands.Cog):
             return
 
         # this sends the embed to the selected channel
-        embed = discord.Embed(title="Nickname Change Request", color=8359053)
-        embed.add_field(name="Current Nick", value=f"{ctx.author.nick}")
-        embed.add_field(name="Requested Nick", value=f"{nick}")
+        embed = discord.Embed(title="Nickname Change Request", color=0x00ff00)
         embed.set_author(name=f"{ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url)
-        embed.add_field(name="Requester", value=f"{ctx.author.mention}")
-        await ctx.message.add_reaction("✅")
-        message = await acc_channel.send(embed=embed)
-        await message.add_reaction("✅")
-        await message.add_reaction("❌")
-        await asyncio.sleep(5)
-        await ctx.message.delete()
+        embed.add_field(name="Current Nickname",value=f'{ctx.author.nick if ctx.author.nick else "Unassigned."}')
+        embed.add_field(name="Requested Nickname",value=f'{nick}')
+        embed.add_field(name="Requester",value=f"{ctx.author.mention}")
+        embed.add_field(name="Message ID",value=f"{ctx.message.id}")
+        embed.add_field(name="Channel ID",value=f"{ctx.channel.id}")
+        embed.add_field(name="Jump to",value=f"{ctx.message.jump_url}", inline=False)
+        this = await acc_channel.send(embed=embed)
+        await this.add_reaction("✅")
+        await this.add_reaction("❌")
 
     @commands.Cog.listener(name="on_raw_reaction_add")
-    async def on_raw_reaction_add(self, payload):
-        # this rules out other reactions
-        if payload.channel_id != accept_channel_id or payload.user_id == self.bot.user.id:
+    async def there_reaction(self, requests_R):
+        if requests_R.channel_id != accept_channel_id or requests_R.user_id == self.bot.user.id:
             return
-        emoji = payload.emoji.name
-        if emoji not in ['✅', '❌']:
+        added_message = await self.bot.get_channel(request_channel_id).fetch_message(requests_R.message_id)
+        reaction_ = str(requests_R.emoji.name)
+        current_guild = self.bot.get_guild(requests_R.guild_id)
+        
+        if reaction_ not in ['✅','❌']:
             return
-
-        # this get the channel, user, emoji and message
-        channel = self.bot.get_channel(id=payload.channel_id)
-        msg = await channel.fetch_message(payload.message_id)
-
-        server = self.bot.get_guild(msg.guild.id)
-
-        easy_embed = msg.embeds[0].to_dict()
-        user = server.get_member(int(easy_embed['fields'][2]['value'][3:-1]))
-        reactor = server.get_member(int(payload.user_id))
-        nickname = easy_embed['fields'][1]['value']
-
-        if emoji == '✅':
-            embed = discord.Embed(title="Nickname Change Request", color=3066993)
-        elif emoji == '❌':
-            embed = discord.Embed(title="Nickname Change Request", color=15158332)
-        else:
-            return
-
-        embed.add_field(name="Current Nick", value=f"{user.nick}")
-        embed.add_field(name="Requested Nick", value=f"{nickname}")
-        embed.set_author(name=f"{user.name}#{user.discriminator}", icon_url=user.avatar_url)
-        embed.add_field(name="Requester", value=f"{user.mention}")
-
-        # this applies the nickname or notifies the user of the denied request
-        if emoji == '✅':
-            embed.add_field(name="Accepted by", value=f"{reactor.mention}")
-            await msg.edit(embed=embed)
-            await msg.clear_reactions()
-            await user.edit(nick=nickname)
-        elif emoji == '❌':
-            embed.add_field(name="Denied by", value=f"{reactor.mention}")
-            await msg.edit(embed=embed)
-            await msg.clear_reactions()
-            await user.send(f"Your nickname change to {nickname}, was denied.")
+        
+        easy_embed = added_message.embeds[0].to_dict()      
+        if easy_embed['title'] == "Nickname Change Request":
+            new_nick = easy_embed['fields'][1]['value']
+            uuid = easy_embed['fields'][2]['value'][2:-1].replace('!','')
+            user_ = current_guild.get_member(int(uuid))
+            current_channel = current_guild.get_channel(int(easy_embed['fields'][4]['value']))
+            original_message = await current_channel.fetch_message(int(easy_embed['fields'][3]['value']))
+            if reaction_ == '✅':
+                embed = discord.Embed(color=0x00ff00)
+                embed.add_field(name="Previous Nickname",value=f'{user_.nick if user_.nick else "Unassigned."}')
+                embed.add_field(name="Current Nickname",value=f'{new_nick}')
+                embed.add_field(name="Fulfiller",value=f"{current_guild.get_member(requests_R.user_id).mention}",inline=False)
+                await user_.edit(nick=new_nick)
+                await original_message.add_reaction('✅')
+            else:
+                embed = discord.Embed(color=0xff0000)
+                embed.add_field(name="Current Nickname",value=f'{user_.nick if user_.nick else "Unassigned."}')
+                embed.add_field(name="Denied Nickname",value=f'{new_nick}')
+                embed.add_field(name="Denier",value=f"{current_guild.get_member(requests_R.user_id).mention}",inline=False)
+                await original_message.add_reaction('❌')
+            embed.add_field(name="Jump to",value=f"{original_message.jump_url}", inline=False)
+            embed.add_field(name="Requester",value=f"{user_.mention}")
+            embed.add_field(name="Message ID",value=f"{easy_embed['fields'][3]['value']}")
+            embed.add_field(name="Channel ID",value=f"{easy_embed['fields'][4]['value']}")
+            embed.set_author(name=f"{user_.name}#{user_.discriminator}", icon_url=user_.avatar_url)    
+            await added_message.clear_reactions()
+            await added_message.edit(embed=embed)
 
     @nick.error
     async def nick_error(self, ctx, error):
