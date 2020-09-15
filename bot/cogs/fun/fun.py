@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import asyncio
+import string
 
 from bot.bot import Bot
 
@@ -13,11 +14,18 @@ class fun(commands.Cog):
         self.bot = bot
         self.guild = None
 
+    def make_ascii(self, text: str):
+        output = ""
+        for letter in text:
+            if letter in string.printable:
+                output += letter
+        return output
+
     @commands.command(name="stickbug")
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def stickbug(self, ctx, user: discord.Member):
         await ctx.send(f"https://stickb.ug/d/{user.id}")
-        
+
     @stickbug.error
     async def nick_error(self, ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
@@ -33,7 +41,7 @@ class fun(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.author.id in rgb_people:
-            if "rgb" in message.content.lower().strip("‍"):
+            if "rgb" in self.make_ascii(message.content.lower()):
                 await message.channel.send("RGB makes your PC faster")
 
 
