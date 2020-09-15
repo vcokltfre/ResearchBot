@@ -4,3 +4,4 @@ discord.py
 pyourls3
 jishaku
 whois
+aiohttp
