@@ -4,6 +4,8 @@ import asyncio
 
 from bot.bot import Bot
 
+rgb_people = [256251362260549632, 738981683516145785]
+
 
 class fun(commands.Cog):
 
@@ -26,6 +28,13 @@ class fun(commands.Cog):
             await ctx.message.delete()
         else:
             raise error
+
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        if message.author.id in rgb_people:
+            if "rgb" in message.content.lower():
+                await message.channel.send("RGB makes your PC faster")
 
 
 def setup(bot: Bot):
