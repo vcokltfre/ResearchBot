@@ -88,9 +88,9 @@ class Nickrequest(commands.Cog):
             embed.add_field(name="Requester",value=f"{user_.mention}")
             embed.add_field(name="Message ID",value=f"{easy_embed['fields'][3]['value']}")
             embed.add_field(name="Channel ID",value=f"{easy_embed['fields'][4]['value']}")
-            embed.set_author(name=f"{user_.name}#{user_.discriminator}", icon_url=user_.avatar_url)    
-            await added_message.clear_reactions()
+            embed.set_author(name=f"{user_.name}#{user_.discriminator}", icon_url=user_.avatar_url)
             await added_message.edit(embed=embed)
+            await added_message.clear_reactions()
 
     @nick.error
     async def nick_error(self, ctx, error):
