@@ -15,7 +15,7 @@ class fun(commands.Cog):
         self.guild = None
 
     def make_ascii(self, text: str):
-        return ''.join(c for c in text if c in string.printable)
+        return ''.join([c for c in text if c in string.printable])
 
     @commands.command(name="stickbug")
     @commands.cooldown(1, 30, commands.BucketType.user)
