@@ -71,7 +71,7 @@ class Nickrequest(commands.Cog):
         server = self.bot.get_guild(msg.guild.id)
 
         easy_embed = msg.embeds[0].to_dict()
-        user = server.get_member(int(easy_embed['fields'][2]['value'][3:-1]))
+        user = server.get_member(int(easy_embed['fields'][2]['value'][2:-1].replace('!', '')))
         reactor = server.get_member(int(payload.user_id))
         nickname = easy_embed['fields'][1]['value']
 
