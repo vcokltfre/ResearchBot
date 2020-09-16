@@ -11,7 +11,7 @@ class Emoji(commands.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
         self.emoji = re.compile(r"<:.{2,32}:[0-9]{17,19}>")
-        self.exempt = ["Administrator", "Moderator"]
+        self.exempt = ["Administrator"]
 
     def is_exempt(self, member: discord.Member):
         roles = [role.name for role in member.roles]
