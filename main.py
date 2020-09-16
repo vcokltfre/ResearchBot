@@ -6,5 +6,6 @@ run([
     "bot.cogs.utility.links",
     "bot.cogs.utility.nickrequest",
     "bot.cogs.fun.fun",
+    "bot.cogs.utility.report",
     "jishaku"
 ], False)
