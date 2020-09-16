@@ -5,7 +5,7 @@ run([
     "bot.cogs.utility.status",
     "bot.cogs.utility.links",
     "bot.cogs.utility.nickrequest",
-    "bot.cogs.utlity.emoji",
+    "bot.cogs.utility.emoji",
     "bot.cogs.fun.fun",
     "jishaku"
 ], False)
