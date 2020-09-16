@@ -18,7 +18,8 @@ guild = your_guild_id
 nick_request_channel_id = channel_id
 nick_accept_channel_id = channel_id
 report_channel_id = channel_id
-report_accept_channel_id = channel_id
+report_lvls_amount = amount_of_report_levels
+report_accept_channel_ids = [channel_ids of the report accept channels]
 
 yourlspw="your yourls password" #You probably dont want this, so you may want to comment out the line that says "bot.cogs.utility.links" in main.py
 ```
