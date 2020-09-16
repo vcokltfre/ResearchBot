@@ -25,6 +25,11 @@ class fun(commands.Cog):
         if message.channel.id == 755820610650636489 and not message.content == "h":
             await message.delete()
 
+    @commands.Cog.listener()
+    async def on_message_edit(self, before, after):
+        if after.channel.id == 755820610650636489 and not after.content == "h":
+            await after.delete()
+
 
 def setup(bot: Bot):
     bot.add_cog(fun(bot))
