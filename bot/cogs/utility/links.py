@@ -63,6 +63,8 @@ class Links(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
+        if self.bot.user == message.author:
+            return
         words = ["discord.gg/", "com/invite/"]
 
         for word in words:
