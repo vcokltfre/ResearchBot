@@ -127,7 +127,7 @@ class Report(commands.Cog):
         # this sends a message if the command is not properly used
         if isinstance(error, (commands.errors.BadArgument, commands.errors.MissingRequiredArgument)):
             msg = f'{ctx.author.mention}, this command is used like this:\n' \
-                  f'!report report_level[1-3] message_url'
+                  f'!report report_level[1-{report_lvls_amount}] message_url'
             await ctx.send(msg, delete_after=5)
             await ctx.message.delete()
         else:
