@@ -22,14 +22,6 @@ class fun(commands.Cog):
             if "rgb" in self.make_ascii(message.content.lower()):
                 await message.channel.send("RGB makes your PC faster")
 
-        if message.channel.id == h_channel and not message.content == "h":
-            await message.delete()
-
-    @commands.Cog.listener()
-    async def on_message_edit(self, before, after):
-        if after.channel.id == h_channel and not after.content == "h":
-            await after.delete()
-
 
 def setup(bot: Bot):
     bot.add_cog(fun(bot))
