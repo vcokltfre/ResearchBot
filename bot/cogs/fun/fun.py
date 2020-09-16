@@ -5,6 +5,7 @@ from discord.ext import commands
 from bot.bot import Bot
 
 rgb_people = [256251362260549632, 738981683516145785]
+h_channel = 755820610650636489
 
 
 class fun(commands.Cog):
@@ -20,6 +21,9 @@ class fun(commands.Cog):
         if message.author.id in rgb_people:
             if "rgb" in self.make_ascii(message.content.lower()):
                 await message.channel.send("RGB makes your PC faster")
+
+        if message.channel.id == 755820610650636489 and not message.content == "h":
+            await message.delete()
 
 
 def setup(bot: Bot):
