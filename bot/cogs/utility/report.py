@@ -3,7 +3,6 @@ from discord.ext import commands
 import asyncio
 
 from bot.bot import Bot
-from config.config import token, name, log_level, log_type
 from config.config import report_channel_id as report_channel_id
 from config.config import report_lvls_amount
 from config.config import report_accept_channel_ids as accept_channel_ids
