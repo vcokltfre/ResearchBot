@@ -3,29 +3,41 @@ from discord.ext import commands
 import asyncio
 
 from bot.bot import Bot
+from config.config import token, name, log_level, log_type
 from config.config import report_channel_id as report_channel_id
-from config.config import report_accept_channel_id as accept_channel_id
+from config.config import report_lvls_amount
+from config.config import report_accept_channel_ids as accept_channel_ids
 
 
-class report(commands.Cog):
+class TooFewArguments(Exception):
+    pass
+
+
+class Report(commands.Cog):
 
     def __init__(self, bot: Bot):
         self.bot = bot
         self.guild = None
 
     @commands.command(name="report")
-    async def report(self, ctx: commands.Context, reported_msg: discord.Message):
-        acc_channel = self.bot.get_channel(accept_channel_id)
+    async def report(self, ctx: commands.Context, lvl: int, reported_msg: discord.Message):
+        acc_channels = []
+        for channel in accept_channel_ids:
+            acc_channels.append(self.bot.get_channel(channel))
+
+        rep_lvls = report_lvls_amount + 1
 
         # this looks if the request is valid
-        if not reported_msg:
-            await ctx.send(f'{ctx.author.mention}, please mention a link.', delete_after=5)
+        if lvl not in range(1, rep_lvls):
+            await ctx.send(f'{ctx.author.mention}, please only use levels 1-{report_lvls_amount}.', delete_after=5)
             await ctx.message.delete()
             return
         if ctx.channel.id != report_channel_id:
             await ctx.send(f'{ctx.author.mention}, please use the correct channel.', delete_after=5)
             await ctx.message.delete()
             return
+
+        lvl = lvl - 1
 
         # this sends the embed to the selected channel
         embed = discord.Embed(title="Reported Message:", color=15158332)
@@ -38,7 +50,7 @@ class report(commands.Cog):
         embed.add_field(name="Reported by:", value=f"{ctx.author.mention}")
         embed.add_field(name="Link to message:", value=f"{reported_msg.jump_url}")
         await ctx.message.add_reaction("✅")
-        message = await acc_channel.send(embed=embed)
+        message = await acc_channels[lvl].send(embed=embed)
         await message.add_reaction("✅")
         await message.add_reaction("❌")
         await asyncio.sleep(5)
@@ -47,7 +59,7 @@ class report(commands.Cog):
     @commands.Cog.listener(name="on_raw_reaction_add")
     async def on_raw_reaction_add(self, payload):
         # this rules out other reactions
-        if payload.channel_id != accept_channel_id or payload.user_id == self.bot.user.id:
+        if payload.channel_id not in accept_channel_ids or payload.user_id == self.bot.user.id:
             return
         emoji = payload.emoji.name
         if emoji not in ['✅', '❌']:
@@ -114,13 +126,15 @@ class report(commands.Cog):
     async def report_error(self, ctx, error):
         # this sends a message if the command is not properly used
         if isinstance(error, (commands.errors.BadArgument, commands.errors.MissingRequiredArgument)):
-            msg = f'{ctx.author.mention}, please mention a proper URL.'
+            msg = f'{ctx.author.mention}, this command is used like this:\n' \
+                  f'!report report_level[1-3] message_url'
             await ctx.send(msg, delete_after=5)
-            await asyncio.sleep(5)
             await ctx.message.delete()
         else:
             raise error
 
 
 def setup(bot: Bot):
-    bot.add_cog(report(bot))
+    if len(accept_channel_ids) < report_lvls_amount:
+        raise TooFewArguments("You are missing one or more channel ids in the config!")
+    bot.add_cog(Report(bot))
