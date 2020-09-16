@@ -57,7 +57,7 @@ class Nickrequest(commands.Cog):
     async def there_reaction(self, requests_R):
         if requests_R.channel_id != accept_channel_id or requests_R.user_id == self.bot.user.id:
             return
-        added_message = await self.bot.get_channel(request_channel_id).fetch_message(requests_R.message_id)
+        added_message = await self.bot.get_channel(accept_channel_id).fetch_message(requests_R.message_id)
         reaction_ = str(requests_R.emoji.name)
         current_guild = self.bot.get_guild(requests_R.guild_id)
         
@@ -76,7 +76,10 @@ class Nickrequest(commands.Cog):
                 embed.add_field(name="Previous Nickname",value=f'{user_.nick if user_.nick else "Unassigned."}')
                 embed.add_field(name="Current Nickname",value=f'{new_nick}')
                 embed.add_field(name="Fulfiller",value=f"{current_guild.get_member(requests_R.user_id).mention}",inline=False)
-                await user_.edit(nick=new_nick)
+                try:
+                    await user_.edit(nick=new_nick)
+                except discord.errors.Forbidden:
+                    embed.set_footer(text="This action has been cancelled due to the lack of permissions to change nickname of the mentioned user.")
                 await original_message.add_reaction('✅')
             else:
                 embed = discord.Embed(color=0xff0000)
