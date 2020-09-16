@@ -68,6 +68,9 @@ class Report(commands.Cog):
         msg = await channel.fetch_message(payload.message_id)
         easy_embed = msg.embeds[0].to_dict()
 
+        if easy_embed['title'] != "Reported Message:":
+            return
+
         server = self.bot.get_guild(msg.guild.id)
         reactor = server.get_member(int(payload.user_id))
 
