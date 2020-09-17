@@ -24,10 +24,8 @@ class Report(commands.Cog):
         for channel in accept_channel_ids:
             acc_channels.append(self.bot.get_channel(channel))
 
-        rep_lvls = report_lvls_amount + 1
-
         # this looks if the request is valid
-        if lvl not in range(1, rep_lvls):
+        if lvl not in range(1, (report_lvls_amount + 1)):
             await ctx.send(f'{ctx.author.mention}, please only use levels 1-{report_lvls_amount}.', delete_after=5)
             await ctx.message.delete()
             return
@@ -35,8 +33,6 @@ class Report(commands.Cog):
             await ctx.send(f'{ctx.author.mention}, please use the correct channel.', delete_after=5)
             await ctx.message.delete()
             return
-
-        lvl = lvl - 1
 
         # this sends the embed to the selected channel
         embed = discord.Embed(title="Reported Message:", color=15158332)
@@ -49,7 +45,7 @@ class Report(commands.Cog):
         embed.add_field(name="Reported by:", value=f"{ctx.author.mention}")
         embed.add_field(name="Link to message:", value=f"{reported_msg.jump_url}")
         await ctx.message.add_reaction("✅")
-        message = await acc_channels[lvl].send(embed=embed)
+        message = await acc_channels[(lvl - 1)].send(embed=embed)
         await message.add_reaction("✅")
         await message.add_reaction("❌")
         await asyncio.sleep(5)
@@ -82,15 +78,8 @@ class Report(commands.Cog):
             field_reported_msg_content_2 = easy_embed['fields'][2]['value']
         field_reporter = easy_embed['fields'][-2]['value']
         field_url = easy_embed['fields'][-1]['value']
-        channel_id = field_url.split('/')[-2]
-        message_id = field_url.split('/')[-1]
 
-        rp_channel = server.get_channel(int(channel_id))
-        try:
-            rp_message = await rp_channel.fetch_message(int(message_id))
-        except discord.NotFound:
-            embed = discord.Embed(title="Reported Message:", color=15105570)
-            embed.set_author(name="Warning: Message couldn't be found")
+        def embed_fields(embed):
             embed.add_field(name="Reported Message Author", value=f"{field_reported_msg_author}")
             if easy_embed['fields'][1]['name'] == "Reported Message Content":
                 embed.add_field(name="Reported Message Content", value=f"{field_reported_msg_content}")
@@ -99,19 +88,19 @@ class Report(commands.Cog):
                 embed.add_field(name="Reported Message Content (2)", value=f"{field_reported_msg_content_2}")
             embed.add_field(name="Reported by:", value=f"{field_reporter}")
             embed.add_field(name="Link to message:", value=f"{field_url}")
+
+        try:
+            rp_message = await commands.MessageConverter().convert(self, field_url)
+        except:
+            embed = discord.Embed(title="Reported Message:", color=15105570)
+            embed.set_author(name="Warning: Message couldn't be found")
+            embed_fields(embed)
             await msg.edit(embed=embed)
             await msg.clear_reactions()
             return
 
         embed = discord.Embed(title="Reported Message:", color=3066993)
-        embed.add_field(name="Reported Message Author", value=f"{field_reported_msg_author}")
-        if easy_embed['fields'][1]['name'] == "Reported Message Content":
-            embed.add_field(name="Reported Message Content", value=f"{field_reported_msg_content}")
-        else:
-            embed.add_field(name="Reported Message Content (1)", value=f"{field_reported_msg_content_1}")
-            embed.add_field(name="Reported Message Content (2)", value=f"{field_reported_msg_content_2}")
-        embed.add_field(name="Reported by:", value=f"{field_reporter}")
-        embed.add_field(name="Link to message:", value=f"{field_url}")
+        embed_fields(embed)
 
         if emoji == '✅':
             embed.add_field(name="Message deletion approved by:", value=f"{reactor.mention}")
