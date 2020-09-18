@@ -6,6 +6,7 @@ run([
     "bot.cogs.utility.links",
     "bot.cogs.utility.nickrequest",
     "bot.cogs.utility.emoji",
+    "bot.cogs.utility.antimassping",
     "bot.cogs.fun.fun",
     "jishaku"
 ], False)
