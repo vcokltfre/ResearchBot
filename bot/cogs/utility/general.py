@@ -76,7 +76,7 @@ class General(commands.Cog):
         """Make the bot logout"""
         self.bot.logger.info(f"Shutting down {name}")
         await self.bot.close()
-        
-        
+
+
 def setup(bot: Bot):
     bot.add_cog(General(bot))
