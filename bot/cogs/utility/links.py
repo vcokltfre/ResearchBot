@@ -69,7 +69,7 @@ class Links(commands.Cog):
         if self.bot.user == message.author:
             return
         words = ["discord.gg/", "com/invite/"]
-        
+
         for word in words:
             if word in message.content:
                 return await message.delete()
