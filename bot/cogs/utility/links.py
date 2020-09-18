@@ -63,6 +63,9 @@ class Links(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
+        if any(role_check in ['Moderator','Administrator'] for role_check in [role.name for role in message.author.roles]):
+            return
+        
         if self.bot.user == message.author:
             return
         words = ["discord.gg/", "com/invite/"]
