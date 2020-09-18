@@ -5,7 +5,7 @@ class AntiMassPing(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
         self.max_mentions = 6
-        
+
     @commands.Cog.listener(name="on_message")
     async def mess(self,message_object):
         if any(role_check in ['Big Brain','Moderator','Administrator'] for role_check in [role.name for role in message_object.author.roles]):
