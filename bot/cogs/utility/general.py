@@ -12,7 +12,7 @@ class General(commands.Cog):
 
     def __init__(self, bot: Bot):
         self.bot = bot
-
+        
     @commands.group(name="cogs")
     @is_dev()
     async def cogs_group(self, ctx: commands.Context):
@@ -76,15 +76,7 @@ class General(commands.Cog):
         """Make the bot logout"""
         self.bot.logger.info(f"Shutting down {name}")
         await self.bot.close()
-
-    @commands.command(name="ping")
-    @commands.has_any_role("Administrator", "Moderator", "Big Brain")
-    async def ping(self, ctx: commands.Context):
-        t_start = time.time()
-        m = await ctx.channel.send("Testing RTT for message editing.")
-        await m.edit(content="Testing...")
-        rtt = time.time() - t_start
-        await m.edit(content=f"Pong!\nMessage edit RTT: {round(rtt*1000, 2)}ms\nWebsocket Latency: {round(self.bot.latency*1000, 2)}ms")
-
+        
+        
 def setup(bot: Bot):
     bot.add_cog(General(bot))
