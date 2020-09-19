@@ -13,7 +13,6 @@ class AntiMassPing(commands.Cog):
         matches = set(message_object.mentions)
         if len(matches) < self.max_mentions:
             return
-        await message_object.delete()
         muted_role = discord.utils.get(message_object.guild.roles, name="Muted")
         await message_object.author.add_roles(muted_role)
         embed = discord.Embed(title="Mass Ping",description=f"AntiSpam has detected a mass ping from the user {message_object.author.mention}.",color=0xff0000)
