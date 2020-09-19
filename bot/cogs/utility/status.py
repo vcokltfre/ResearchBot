@@ -31,7 +31,7 @@ class Status(commands.Cog):
     @is_dev()
     async def status_group(self, ctx: commands.Context):
         if ctx.invoked_subcommand == None:
-            await ctx.channel.send("Usage: `!status <set | enable | disbale> [new status]`")
+            await ctx.channel.send("Usage: `!status <set | enable | disable> [new status]`")
 
     @status_group.command(name="set")
     async def status_set(self, ctx: commands.Context, *status):
