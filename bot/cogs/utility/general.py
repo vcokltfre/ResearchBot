@@ -1,10 +1,12 @@
 import discord
 import time
+import requests
+import json
 from discord.ext import commands
 
 from bot.bot import Bot
 from bot.utils.checks import is_dev
-from config.config import name
+from config.config import name, dmhook
 
 
 class General(commands.Cog):
@@ -85,6 +87,19 @@ class General(commands.Cog):
         await m.edit(content="Testing...")
         rtt = time.time() - t_start
         await m.edit(content=f"Pong!\nMessage edit RTT: {round(rtt*1000, 2)}ms\nWebsocket Latency: {round(self.bot.latency*1000, 2)}ms")
+
+    #DM Logger
+    @commands.Cog.listener()
+    async def on_message(self, message: discord.Message):
+        if not message.channel == message.author.dm_channel:
+            data = {
+                "username":str(message.author),
+                "content":message.content
+            }
+            headers = {
+                "Content-Type": "application/json"
+            }
+            requests.post(dmhook, data=json.dumps(data), headers=headers)
 
 
 def setup(bot: Bot):
