@@ -13,7 +13,7 @@ class Random(commands.Cog):
         self.bot = bot
         self.cfg = ConfigUtil("./config/maze.json")
 
-    @commands.command(name="rdm")
+    @commands.group(name="rdm")
     @is_dev()
     async def rdm_group(self, ctx: commands.Context):
         if ctx.invoked_subcommand == None:
