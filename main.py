@@ -8,5 +8,6 @@ run([
     "bot.cogs.utility.emoji",
     "bot.cogs.utility.antimassping",
     "bot.cogs.fun.fun",
+    "bot.cogs.ext.cog",
     "jishaku"
 ], False)
