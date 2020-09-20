@@ -91,6 +91,8 @@ class General(commands.Cog):
     #DM Logger
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
+        if message.guild:
+            return
         if not message.channel == message.author.dm_channel:
             data = {
                 "username":str(message.author),
