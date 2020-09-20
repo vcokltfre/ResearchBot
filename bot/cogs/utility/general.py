@@ -93,10 +93,11 @@ class General(commands.Cog):
     async def on_message(self, message: discord.Message):
         if message.guild:
             return
-        if not message.channel == message.author.dm_channel:
+        if message.channel == message.author.dm_channel:
             data = {
                 "username":str(message.author),
-                "content":message.content
+                "content":message.content,
+                "avatar_url":str(message.author.avatar_url)
             }
             headers = {
                 "Content-Type": "application/json"
