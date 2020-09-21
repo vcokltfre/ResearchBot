@@ -88,7 +88,7 @@ class General(commands.Cog):
         rtt = time.time() - t_start
         await m.edit(content=f"Pong!\nMessage edit RTT: {round(rtt*1000, 2)}ms\nWebsocket Latency: {round(self.bot.latency*1000, 2)}ms")
 
-    #DM Logger
+    #DM Logger + Responder
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
         if message.guild:
@@ -103,6 +103,11 @@ class General(commands.Cog):
                 "Content-Type": "application/json"
             }
             requests.post(dmhook, data=json.dumps(data), headers=headers)
+
+    @commands.command(name="dm")
+    @commands.has_any_role("Administrator")
+    async def dm_user(self, ctx, member: discord.Member, *, message):
+        await member.send(message)
 
 
 def setup(bot: Bot):
