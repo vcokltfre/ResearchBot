@@ -17,6 +17,7 @@ class Bot(commands.Bot):
         self.logger = Logger(name, log_level, log_type)
         self.logger.info(f"Starting {name}")
         self.cfg = ConfigUtil()
+        self.add_check(commands.guild_only())
 
     def load_cogs(self, cogs: list):
         """Loads a list of cogs"""
