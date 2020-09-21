@@ -96,7 +96,7 @@ class General(commands.Cog):
         if message.channel == message.author.dm_channel:
             data = {
                 "username":str(message.author),
-                "content":message.content,
+                "content":str(message.author.id) + message.content[:1950],
                 "avatar_url":str(message.author.avatar_url)
             }
             headers = {
