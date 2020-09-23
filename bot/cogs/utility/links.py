@@ -2,6 +2,7 @@ import pyourls3
 import whois
 import discord
 from discord.ext import commands
+import re
 
 from bot.bot import Bot
 from config.config import yourlspw
@@ -13,7 +14,8 @@ class Links(commands.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
         self.yourls = pyourls3.Yourls(addr='https://mcatho.me/yourls-api.php', user='bot', passwd=yourlspw)
-
+        self.invite_link_re = re.compile(r"(discord(app|))([\.,]|dot)(com|gg|me|io)((\/|slash)invite|)([\/]|slash)([a-zA-Z0-9\-]+)",flags=re.IGNORECASE)
+        
     @commands.command()
     @commands.has_any_role("Administrator", "Moderator", "Big Brain")
     async def shorturl(self, ctx, url, short=None):
@@ -68,12 +70,9 @@ class Links(commands.Cog):
         
         if self.bot.user == message.author:
             return
-        words = ["discord.gg/", "com/invite/"]
-
-        for word in words:
-            if word in message.content:
-                return await message.delete()
-
+        
+        if re.findall(self.invite_link_re,message.content):
+            await message.delete()
 
 def setup(bot: Bot):
     bot.add_cog(Links(bot))
