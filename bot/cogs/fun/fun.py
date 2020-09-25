@@ -28,6 +28,8 @@ class fun(commands.Cog):
                 await message.channel.send("RGB makes your PC faster")
         if message.channel.id == h_channel and not message.content == 'h':
             await message.delete()
+        if message.channel.id == h_channel and len(message.attachments) != 0:
+            await message.delete()
 
     @commands.Cog.listener()
     async def on_message_edit(self, before, after):
