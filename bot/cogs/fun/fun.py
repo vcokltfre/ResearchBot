@@ -5,7 +5,7 @@ from discord.ext import commands
 from bot.bot import Bot
 
 rgb_people = [256251362260549632, 738981683516145785]
-h_channel = 755820610650636489
+h_channel = 756100804892557372
 
 
 class fun(commands.Cog):
