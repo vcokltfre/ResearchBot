@@ -1,4 +1,5 @@
 import time
+import asyncio
 import discord
 from discord.ext import commands
 from pathlib import Path
@@ -50,9 +51,12 @@ class Autopin(commands.Cog):
             await m.delete()
 
         m = await message.channel.send(mess)
+        
         with self.p.open('w') as f:
             f.write(str(m.id))
         self.mid = m.id
+        await asyncio.sleep(4)
+        await m.clear_reactions()
 
 
 def setup(bot: Bot):
