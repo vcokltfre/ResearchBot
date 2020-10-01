@@ -10,12 +10,12 @@ mess = """
 __**Here you can suggest anything we should do!**__
 
 __**BUT!** There's a few things you should consider before suggesting something:__
-:book: **Please check if it hasn't been suggested already.** Use the search function, or ask in #suggestion-discussion.
+:book: **Please check if it hasn't been suggested already.** Use the search function, or ask in <#738860957685776395>.
 :mag_right: A lot of seeds are already publicly known! Please look stuff up on Google before you suggest it.
 :thinking: Consider if what you're suggesting has any significance, be it historical or technical.
-:x: Blatant duplicates and spam will get deleted without notice! Otherwise you'll get notified in #suggestion-discussion if there are any problems.
-__Common suggestions include:__ All the panoramas (we'll work on them later), MC Trailer (#trailer-resources), Herobrine picture (#herobrine-resources) Yogscast seed (4090136037452000329), DanTDM's lab seed (5021019576385777538), and various MC renders.
-For more info, check the pinned messages.
+:x: **Blatant duplicates and spam will get deleted without notice!** Otherwise you'll get notified in <#738860957685776395> if there are any problems.
+__Common suggestions include:__ All the panoramas (we'll work on them later), MC Trailer (<#756961538555773028>), Herobrine picture (#herobrine-resources) Yogscast seed (4090136037452000329), DanTDM's lab seed (5021019576385777538), and various MC renders.
+For more info, check the pinned messages, if you clearly haven't checked pinned messages and suggest something mentioned in one, your access to the suggestions channel may be removed.
 """
 
 channel = 738836486199181312
