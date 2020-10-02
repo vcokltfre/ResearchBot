@@ -16,6 +16,10 @@ __**BUT!** There's a few things you should consider before suggesting something:
 :x: **Blatant duplicates and spam will get deleted without notice!** Otherwise you'll get notified in <#738860957685776395> if there are any problems.
 __Common suggestions include:__ All the panoramas (we'll work on them later), MC Trailer (<#756961538555773028>), Herobrine picture (<#751840315761229874>) Yogscast seed (4090136037452000329), DanTDM's lab seed (5021019576385777538), and various MC renders.
 For more info, check the pinned messages, if you clearly haven't checked pinned messages and suggest something mentioned in one, your access to the suggestions channel may be removed.
+
+:warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:
+If you don't read this message, you'll be muted for a day.
+:warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:
 """
 
 channel = 738836486199181312
