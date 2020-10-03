@@ -14,6 +14,18 @@ class Links(commands.Cog):
         self.bot = bot
         self.yourls = pyourls3.Yourls(addr='https://mcatho.me/yourls-api.php', user='bot', passwd=yourlspw)
 
+    async def check(self, message):
+        if any(role_check in ['Moderator','Administrator'] for role_check in [role.name for role in message.author.roles]):
+            return
+        
+        if self.bot.user == message.author:
+            return
+        words = ["discord.gg/", "com/invite/", "discord.io"]
+
+        for word in words:
+            if word in message.content:
+                return await message.delete()
+
     @commands.command()
     @commands.has_any_role("Administrator", "Moderator", "Big Brain")
     async def shorturl(self, ctx, url, short=None):
@@ -63,16 +75,11 @@ class Links(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
-        if any(role_check in ['Moderator','Administrator'] for role_check in [role.name for role in message.author.roles]):
-            return
-        
-        if self.bot.user == message.author:
-            return
-        words = ["discord.gg/", "com/invite/", "discord.io"]
+        await self.check(message)
 
-        for word in words:
-            if word in message.content:
-                return await message.delete()
+    @commands.Cog.listener()
+    async def on_message_edit(self, before: discord.Message, after: discord.Message):
+        await self.check(after)
 
 
 def setup(bot: Bot):
