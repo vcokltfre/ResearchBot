@@ -17,6 +17,8 @@ __**BUT!** There's a few things you should consider before suggesting something:
 __Common suggestions include:__ All the panoramas (we'll work on them later), MC Trailer (<#756961538555773028>), Herobrine picture (<#751840315761229874>) Yogscast seed (4090136037452000329), DanTDM's lab seed (5021019576385777538), and various MC renders.
 For more info, check the pinned messages, if you clearly haven't checked pinned messages and suggest something mentioned in one, your access to the suggestions channel may be removed.
 
+***DO NOT*** suggest the seed for the Smash Ultimate backgrounds. You will be muted.
+
 :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:
 If you don't read this message, you'll be muted for a day.
 :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:
