@@ -91,6 +91,9 @@ class General(commands.Cog):
         rtt2 = time.time() - t_start - (rtt1 + send)
         await m.edit(content="Testing Message Edit: Run 3...")
         rtt3 = time.time() - t_start - (rtt1 + rtt2 + send)
+        ds = time.time()
+        await m.delete()
+        delete = time.time() - ds
 
         avg = (rtt1 + rtt2 + rtt3) / 3
         minimum = min(rtt1, rtt2, rtt3)*1000
@@ -98,6 +101,7 @@ class General(commands.Cog):
 
         embed = discord.Embed(title="ResearchBot Ping", description=f"Websocket latency: {round(self.bot.latency*1000, p)}ms", colour=0x6AFF6A)
         embed.add_field(name="Message Send", value=f"{round(send*1000, p)}ms")
+        embed.add_field(name="Message Delete", value=f"{round(delete*1000, p)}ms")
         embed.add_field(name="Edit RTT Avg/Min/Max/Diff", value=f"{round(avg*1000, p)}ms / {round(minimum, p)}ms / {round(maximum, p)}ms / {round(maximum - minimum, p)}ms", inline=False)
         embed.add_field(name="Edit RTT Run 1", value=f"{round(rtt1*1000, p)}ms")
         embed.add_field(name="Edit RTT Run 2", value=f"{round(rtt2*1000, p)}ms")
