@@ -130,6 +130,13 @@ class General(commands.Cog):
     async def dm_user(self, ctx, member: discord.Member, *, message):
         await member.send(message)
 
+    @commands.command(name="mimic")
+    @is_dev()
+    async def mimic(self, ctx: commands.Context, member: discord.Member, *, text):
+        webhook = await ctx.channel.create_webhook(name=str(member.name))
+        await webhook.send(content=text, avatar_url=str(member.avatar_url))
+        await webhook.delete()
+
 
 def setup(bot: Bot):
     bot.add_cog(General(bot))
