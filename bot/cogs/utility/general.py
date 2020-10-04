@@ -1,6 +1,5 @@
 import discord
 import time
-from discord import colour
 import requests
 import json
 from discord.ext import commands
