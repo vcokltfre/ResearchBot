@@ -133,6 +133,7 @@ class General(commands.Cog):
     @commands.command(name="mimic")
     @is_dev()
     async def mimic(self, ctx: commands.Context, member: discord.Member, *, text):
+        await ctx.message.delete()
         webhook = await ctx.channel.create_webhook(name=str(member.name))
         await webhook.send(content=text, avatar_url=str(member.avatar_url))
         await webhook.delete()
