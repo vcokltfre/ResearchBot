@@ -1,5 +1,6 @@
 import discord
 import time
+from discord import colour
 import requests
 import json
 from discord.ext import commands
@@ -81,12 +82,29 @@ class General(commands.Cog):
 
     @commands.command(name="ping")
     @commands.has_any_role("Administrator", "Moderator", "Big Brain")
-    async def ping(self, ctx: commands.Context):
+    async def ping(self, ctx: commands.Context, p: int = 2):
         t_start = time.time()
         m = await ctx.channel.send("Testing RTT for message editing.")
-        await m.edit(content="Testing...")
-        rtt = time.time() - t_start
-        await m.edit(content=f"Pong!\nMessage edit RTT: {round(rtt*1000, 2)}ms\nWebsocket Latency: {round(self.bot.latency*1000, 2)}ms")
+        send = time.time() - t_start
+        await m.edit(content="Testing Message Edit: Run 1...")
+        rtt1 = time.time() - t_start - send
+        await m.edit(content="Testing Message Edit: Run 2...")
+        rtt2 = time.time() - t_start - (rtt1 + send)
+        await m.edit(content="Testing Message Edit: Run 3...")
+        rtt3 = time.time() - t_start - (rtt1 + rtt2 + send)
+
+        avg = (rtt1 + rtt2 + rtt3) / 3
+        minimum = min(rtt1, rtt2, rtt3)*1000
+        maximum = max(rtt1, rtt2, rtt3)*1000
+
+        embed = discord.Embed(title="ResearchBot Ping", description=f"Websocket latency: {round(self.bot.latency*1000, p)}ms", colour=0x6AFF6A)
+        embed.add_field(name="Message Send", value=f"{round(send*1000, p)}ms")
+        embed.add_field(name="Edit RTT Avg/Min/Max/Diff", value=f"{round(avg*1000, p)}ms / {round(minimum, p)}ms / {round(maximum, p)}ms / {round(maximum - minimum, p)}ms", inline=False)
+        embed.add_field(name="Edit RTT Run 1", value=f"{round(rtt1*1000, p)}ms")
+        embed.add_field(name="Edit RTT Run 2", value=f"{round(rtt2*1000, p)}ms")
+        embed.add_field(name="Edit RTT Run 3", value=f"{round(rtt3*1000, p)}ms")
+
+        await ctx.send(embed=embed)
 
     #DM Logger + Responder
     @commands.Cog.listener()
