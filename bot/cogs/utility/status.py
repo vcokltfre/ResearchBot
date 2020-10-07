@@ -18,6 +18,7 @@ class Status(commands.Cog):
         else:
             self.enabled = True
             bot.cfg.set_attr("status_updates", True)
+        self.enabled = False
 
     async def _set(self, status: str):
         if self.enabled:
@@ -52,8 +53,9 @@ class Status(commands.Cog):
     # Event listeners
     @commands.Cog.listener()
     async def on_ready(self):
-        self.guild = self.bot.get_guild(guild)
-        await self._auto()
+        #self.guild = self.bot.get_guild(guild)
+        #await self._auto()
+        await self._set("MC@H community")
 
     @commands.Cog.listener()
     async def on_member_join(self, member: discord.Member):
