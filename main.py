@@ -10,5 +10,6 @@ run([
     "bot.cogs.utility.autopin",
     "bot.cogs.fun.fun",
     "bot.cogs.ext.cog",
+    "bot.cogs.fun.imdec",
     "jishaku"
 ], False)
