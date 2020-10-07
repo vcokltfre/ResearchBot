@@ -11,6 +11,7 @@ class Images(commands.Cog):
 
     def __init__(self, bot: Bot):
         self.bot = bot
+        self.mentions = discord.AllowedMentions(everyone=False, users=False, roles=False)
 
         if not Path("./tmp/").exists():
             Path("./tmp/").mkdir()
@@ -39,7 +40,7 @@ class Images(commands.Cog):
     @img_grp.command(name="encode", aliases=["e", "ec"])
     async def img_enc(self, ctx: commands.Context, *, text):
         make_image(text, "./tmp/img_out.png")
-        await ctx.send(file=discord.File("./tmp/img_out.png", filename="encoded.png"))
+        await ctx.send(file=discord.File("./tmp/img_out.png", filename="encoded.png"), allowed_mentions=self.mentions)
 
 
 def setup(bot: Bot):
