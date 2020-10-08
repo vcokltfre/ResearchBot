@@ -20,7 +20,7 @@ class Links(commands.Cog):
         
         if self.bot.user == message.author:
             return
-        words = ["discord.gg/", "com/invite/", "discord.io"]
+        words = ["discord.gg/", "com/invite/", "discord.io", ":hahapoorpeople:"]
 
         for word in words:
             if word in message.content:
