@@ -17,7 +17,7 @@ class Links(commands.Cog):
 
     async def check(self, message):
         if any(role_check in ['Moderator','Administrator'] for role_check in [role.name for role in message.author.roles]):
-            if message.author.id == 738981683516145785:
+            if message.author.id in [738981683516145785,753541087469240390]:
                 if re.match(r"<(a?):([a-zA-Z0-9_\-]+):(\d+)>", message.content):
                     await message.delete()
                 elif "http" in message.content:
