@@ -17,6 +17,7 @@ class Langwarn(commands.Cog):
     async def on_message(self, message: discord.Message):
         if message.author == self.bot.user or len(message.content) < 12:
             return
+        if any([role in [r.name for r in message.author.roles] for role in ["Administrator", "Moderator"]]): return
         lang = self.t.detect(message.content)
         if not lang.lang == "en":
             uid = str(message.author.id)
