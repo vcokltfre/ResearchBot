@@ -18,6 +18,7 @@ class Langwarn(commands.Cog):
         if message.author == self.bot.user or len(message.content) < 12:
             return
         if any([role in [r.name for r in message.author.roles] for role in ["Administrator", "Moderator"]]): return
+        if message.channel.id in [762748542787649586]: return
         lang = self.t.detect(message.content)
         if not lang.lang == "en":
             uid = str(message.author.id)
