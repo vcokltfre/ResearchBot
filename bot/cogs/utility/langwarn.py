@@ -28,7 +28,7 @@ class Langwarn(commands.Cog):
                 self.b[uid] += 1
             if self.b[uid] >= 3:
                 text = self.t.translate(self.m.format(LANGUAGES[lang.lang.lower()]), dest=lang.lang)
-                await message.channel.send(text.text)
+                await message.channel.send(text.text, delete_after=20)
                 del self.b[uid]
 
 def setup(bot):
