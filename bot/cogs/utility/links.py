@@ -20,6 +20,8 @@ class Links(commands.Cog):
             if message.author.id == 738981683516145785:
                 if re.match(r"<(a?):([a-zA-Z0-9_\-]+):(\d+)>", message.content):
                     await message.delete()
+                if "http" in message.content:
+                    await message.delete()
             return
         
         if self.bot.user == message.author:
