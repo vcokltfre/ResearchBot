@@ -16,11 +16,13 @@ class Links(commands.Cog):
 
     async def check(self, message):
         if any(role_check in ['Moderator','Administrator'] for role_check in [role.name for role in message.author.roles]):
+            if ":hahapoorpeople:" in message.content:
+                await message.delete()
             return
         
         if self.bot.user == message.author:
             return
-        words = ["discord.gg/", "com/invite/", "discord.io", ":hahapoorpeople:"]
+        words = ["discord.gg/", "com/invite/", "discord.io"]
 
         for word in words:
             if word in message.content:
