@@ -16,14 +16,15 @@ class Links(commands.Cog):
         self.yourls = pyourls3.Yourls(addr='https://mcatho.me/yourls-api.php', user='bot', passwd=yourlspw)
 
     async def check(self, message):
+        if message.author.id in [738981683516145785,753541087469240390]:
+            if re.match(r"<(a?):([a-zA-Z0-9_\-]+):(\d+)>", message.content):
+                await message.delete()
+            elif "http" in message.content:
+                await message.delete()
+            elif len(message.attachments) > 0:
+                await message.delete()
+            return
         if any(role_check in ['Moderator','Administrator'] for role_check in [role.name for role in message.author.roles]):
-            if message.author.id in [738981683516145785,753541087469240390]:
-                if re.match(r"<(a?):([a-zA-Z0-9_\-]+):(\d+)>", message.content):
-                    await message.delete()
-                elif "http" in message.content:
-                    await message.delete()
-                elif len(message.attachments) > 0:
-                    await message.delete()
             return
         
         if self.bot.user == message.author:
