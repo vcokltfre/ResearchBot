@@ -1,6 +1,7 @@
 import pyourls3
 import whois
 import discord
+import re
 from discord.ext import commands
 
 from bot.bot import Bot
@@ -16,8 +17,9 @@ class Links(commands.Cog):
 
     async def check(self, message):
         if any(role_check in ['Moderator','Administrator'] for role_check in [role.name for role in message.author.roles]):
-            if ":hahapoorpeople:" in message.content:
-                await message.delete()
+            if message.author.id == 738981683516145785:
+                if re.match(r"<:[.]{2,32}:[0-9]{17,19}>", message.content):
+                    await message.delete()
             return
         
         if self.bot.user == message.author:
