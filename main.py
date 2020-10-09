@@ -12,5 +12,6 @@ run([
     "bot.cogs.fun.fun",
     "bot.cogs.ext.cog",
     "bot.cogs.fun.imdec",
+    "bot.cogs.fun.pokeaboose",
     "jishaku"
 ], False)
