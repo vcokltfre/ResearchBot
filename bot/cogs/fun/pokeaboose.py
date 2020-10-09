@@ -10,7 +10,7 @@ class PokeAboose(commands.Cog):
       async def pokeaboose(self, poke: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
           if not poke.id in self.vc1lovers:
               return
-          if after.channel == 720730080988627005:
+          if after.channel.id == 720730080988627005:
               return await poke.edit(voice_channel=None)
 
 def setup(bot: commands.Bot):
