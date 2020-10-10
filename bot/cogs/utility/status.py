@@ -35,20 +35,22 @@ class Status(commands.Cog):
             await ctx.channel.send("Usage: `!status <set | enable | disable> [new status]`")
 
     @status_group.command(name="set")
-    async def status_set(self, ctx: commands.Context, *status):
-        status = " ".join(status)
+    async def status_set(self, ctx: commands.Context, *, status):
         await self._set(status)
+        await ctx.send(f"Set status to `{status}`.")
 
     @status_group.command(name="enable")
     async def status_enable(self, ctx: commands.Context):
         self.enabled = True
         self.bot.cfg.set_attr("status_updates", True)
         await self._auto()
+        await ctx.send("Enabled status updates.")
 
     @status_group.command(name="disable")
     async def status_disable(self, ctx: commands.Context):
         self.disabled = True
         self.bot.cfg.set_attr("status_updates", False)
+        await ctx.send("Disabled status updates.")
 
     # Event listeners
     @commands.Cog.listener()
