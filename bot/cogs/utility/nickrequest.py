@@ -7,7 +7,7 @@ from config.config import nick_request_channel_id as request_channel_id
 from config.config import nick_accept_channel_id as accept_channel_id
 
 command_timeout = 600
-allowed_list = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;?@[\\]^_`{|}~ '
+allowed_list = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;?@[\\]^_`{|}~ 🎃'
 
 
 class Nickrequest(commands.Cog):
