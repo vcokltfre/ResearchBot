@@ -21,11 +21,11 @@ class Status(commands.Cog):
         self.enabled = False
 
     async def _set(self, status: str):
-        if self.enabled:
-            await self.bot.change_presence(activity=discord.Game(name=status))
+        await self.bot.change_presence(activity=discord.Game(name=status))
 
     async def _auto(self):
-        await self._set(f"with {self.guild.member_count} users")
+        if self.enabled:
+            await self._set(f"with {self.guild.member_count} users")
 
     # Commands
     @commands.group(name="status", aliases=["presence"])
