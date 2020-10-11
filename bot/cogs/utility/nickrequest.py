@@ -7,7 +7,7 @@ from config.config import nick_request_channel_id as request_channel_id
 from config.config import nick_accept_channel_id as accept_channel_id
 
 command_timeout = 600
-allowed_list = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;?@[\\]^_`{|}~ '
+allowed_list = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;?@[\\]^_`{|}~ 🎃'
 
 
 class Nickrequest(commands.Cog):
@@ -25,7 +25,7 @@ class Nickrequest(commands.Cog):
         nick.replace("'", "\'")
 
         nick = ''.join(allowed_character for allowed_character in nick if allowed_character in allowed_list)
-        
+
         if not nick:
             await ctx.send(f'{ctx.author.mention}, please mention a nick to change to.', delete_after=5)
             await ctx.message.delete()
@@ -60,10 +60,10 @@ class Nickrequest(commands.Cog):
         added_message = await self.bot.get_channel(accept_channel_id).fetch_message(requests_R.message_id)
         reaction_ = str(requests_R.emoji.name)
         current_guild = self.bot.get_guild(requests_R.guild_id)
-        
+
         if reaction_ not in ['✅','❌']:
             return
-        
+
         easy_embed = added_message.embeds[0].to_dict()      
         if easy_embed['title'] == "Nickname Change Request":
             new_nick = easy_embed['fields'][1]['value']

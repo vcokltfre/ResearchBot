@@ -17,6 +17,7 @@ class Bot(commands.Bot):
         self.logger = Logger(name, log_level, log_type)
         self.logger.info(f"Starting {name}")
         self.cfg = ConfigUtil()
+        self.add_check(commands.guild_only())
 
     def load_cogs(self, cogs: list):
         """Loads a list of cogs"""
@@ -47,7 +48,8 @@ def run(cogs: list, debug=False, prefix: list = ["!"], help_command = None):
         debug=debug,
         command_prefix=prefix,
         max_messages=10000,
-        help_command=help_command
+        help_command=help_command,
+        intents=discord.Intents.all()
     )
 
     bot.load_cogs(cogs)

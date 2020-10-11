@@ -1,10 +1,12 @@
 import discord
 import time
+import requests
+import json
 from discord.ext import commands
 
 from bot.bot import Bot
 from bot.utils.checks import is_dev
-from config.config import name
+from config.config import name, dmhook
 
 
 class General(commands.Cog):
@@ -74,9 +76,70 @@ class General(commands.Cog):
     @is_dev()
     async def restart(self, ctx: commands.Context):
         """Make the bot logout"""
+        await ctx.send("Restarting...")
+        await self.bot.change_presence(status=discord.Status.invisible)
         self.bot.logger.info(f"Shutting down {name}")
         await self.bot.close()
-        
-        
+
+    @commands.command(name="ping")
+    @commands.has_any_role("Administrator", "Moderator", "Big Brain")
+    async def ping(self, ctx: commands.Context, p: int = 2):
+        t_start = time.time()
+        m = await ctx.channel.send("Testing RTT for message editing.")
+        send = time.time() - t_start
+        await m.edit(content="Testing Message Edit: Run 1...")
+        rtt1 = time.time() - t_start - send
+        await m.edit(content="Testing Message Edit: Run 2...")
+        rtt2 = time.time() - t_start - (rtt1 + send)
+        await m.edit(content="Testing Message Edit: Run 3...")
+        rtt3 = time.time() - t_start - (rtt1 + rtt2 + send)
+        ds = time.time()
+        await m.delete()
+        delete = time.time() - ds
+
+        avg = (rtt1 + rtt2 + rtt3) / 3
+        minimum = min(rtt1, rtt2, rtt3)*1000
+        maximum = max(rtt1, rtt2, rtt3)*1000
+
+        embed = discord.Embed(title="ResearchBot Ping", description=f"Websocket latency: {round(self.bot.latency*1000, p)}ms", colour=0x6AFF6A)
+        embed.add_field(name="Message Send", value=f"{round(send*1000, p)}ms")
+        embed.add_field(name="Message Delete", value=f"{round(delete*1000, p)}ms")
+        embed.add_field(name="Edit RTT Avg/Min/Max/Diff", value=f"{round(avg*1000, p)}ms / {round(minimum, p)}ms / {round(maximum, p)}ms / {round(maximum - minimum, p)}ms", inline=False)
+        embed.add_field(name="Edit RTT Run 1", value=f"{round(rtt1*1000, p)}ms")
+        embed.add_field(name="Edit RTT Run 2", value=f"{round(rtt2*1000, p)}ms")
+        embed.add_field(name="Edit RTT Run 3", value=f"{round(rtt3*1000, p)}ms")
+
+        await ctx.send(embed=embed)
+
+    #DM Logger + Responder
+    @commands.Cog.listener()
+    async def on_message(self, message: discord.Message):
+        if message.guild:
+            return
+        if message.channel == message.author.dm_channel:
+            data = {
+                "username":str(message.author),
+                "content":f"({message.author.id}) {message.content[:1950].replace('@', '')}",
+                "avatar_url":str(message.author.avatar_url)
+            }
+            headers = {
+                "Content-Type": "application/json"
+            }
+            requests.post(dmhook, data=json.dumps(data), headers=headers)
+
+    @commands.command(name="dm")
+    @commands.has_any_role("Administrator")
+    async def dm_user(self, ctx, member: discord.Member, *, message):
+        await member.send(message)
+
+    @commands.command(name="mimic")
+    @is_dev()
+    async def mimic(self, ctx: commands.Context, member: discord.Member, *, text):
+        await ctx.message.delete()
+        webhook = await ctx.channel.create_webhook(name=str(member.name))
+        await webhook.send(content=text, avatar_url=str(member.avatar_url))
+        await webhook.delete()
+
+
 def setup(bot: Bot):
     bot.add_cog(General(bot))

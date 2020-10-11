@@ -6,3 +6,5 @@ jishaku
 whois
 aiohttp
 aiofiles
+pillow
+googletrans
