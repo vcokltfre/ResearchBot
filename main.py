@@ -9,6 +9,7 @@ run([
     "bot.cogs.utility.antimassping",
     "bot.cogs.utility.autopin",
     "bot.cogs.utility.langwarn",
+    "bot.cogs.utility.automod",
     "bot.cogs.fun.fun",
     "bot.cogs.ext.cog",
     "bot.cogs.fun.imdec",
