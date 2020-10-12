@@ -11,6 +11,7 @@ run([
     "bot.cogs.utility.langwarn",
     "bot.cogs.utility.automod",
     "bot.cogs.fun.fun",
+    "bot.cogs.fun.stonks",
     "bot.cogs.ext.cog",
     "bot.cogs.fun.imdec",
     "jishaku"
