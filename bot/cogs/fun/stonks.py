@@ -12,7 +12,7 @@ class Stonks(commands.Cog):
 
     @commands.command(name="stonks")
     async def stonk_cmd(self, ctx, ticker='nvda'):
-        await ctx.send(f"Stonks for {ticker.upper()}: ${round(get_live_price(ticker), 3)}")
+        await ctx.send(f"Stonks for {ticker.upper()}: ${round(get_live_price(ticker), 3) if not ticker == 'vco' else 99999}")
 
 
 def setup(bot: Bot):
