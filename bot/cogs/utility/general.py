@@ -149,7 +149,7 @@ class General(commands.Cog):
 
     @commands.command(name="time")
     @is_dev()
-    async def gtime(self, ctx: commands.Conetxt, *, tm):
+    async def gtime(self, ctx: commands.Context, *, tm):
         t, tstat = self.cal.parse(tm)
         y = t.tm_year
         mo = ensure_length(str(t.tm_mon), 2)
