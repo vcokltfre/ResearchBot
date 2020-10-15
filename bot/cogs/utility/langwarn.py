@@ -38,6 +38,7 @@ class Langwarn(commands.Cog):
     async def aaaaa(self, ctx, *, text):
         for i in range(12):
             text = self.t.translate(text, dest=random.choice(LANGUAGES.keys()))
+            await asyncio.sleep(0.5)
         text = self.t.translate(text, dest="en")
         await ctx.send(text)
 
