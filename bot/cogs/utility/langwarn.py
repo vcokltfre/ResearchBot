@@ -36,11 +36,12 @@ class Langwarn(commands.Cog):
     @commands.command(name="aaaaa")
     @commands.has_any_role("Administrator")
     async def aaaaa(self, ctx, *, text):
-        for i in range(12):
-            text = self.t.translate(text, dest=random.choice([key for key in LANGUAGES])).text
-            await asyncio.sleep(0.5)
-        text = self.t.translate(text, dest="en").text
-        await ctx.send(text)
+        async with ctx.channel.typing():
+            for i in range(12):
+                text = self.t.translate(text, dest=random.choice([key for key in LANGUAGES])).text
+                await asyncio.sleep(0.5)
+            text = self.t.translate(text, dest="en").text
+            await ctx.send(text)
 
 def setup(bot):
     bot.add_cog(Langwarn(bot))
