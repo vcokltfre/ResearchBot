@@ -2,6 +2,8 @@
 
 from discord.ext import commands
 import discord
+import random
+import asyncio
 from googletrans import Translator, LANGUAGES
 
 class Langwarn(commands.Cog):
@@ -30,6 +32,14 @@ class Langwarn(commands.Cog):
                 text = self.t.translate(self.m.format(LANGUAGES[lang.lang.lower()]), dest=lang.lang)
                 await message.channel.send(text.text, delete_after=20)
                 del self.b[uid]
+
+    @commands.command(name="aaaaa")
+    @commands.has_any_role("Administrator")
+    async def aaaaa(self, ctx, *, text):
+        for i in range(12):
+            text = self.t.translate(text, dest=random.choice(LANGUAGES.keys()))
+        text = self.t.translate(text, dest="en")
+        await ctx.send(text)
 
 def setup(bot):
     bot.add_cog(Langwarn(bot))
