@@ -8,3 +8,5 @@ aiohttp
 aiofiles
 pillow
 googletrans
+yahoo_fin
+parsedatetime

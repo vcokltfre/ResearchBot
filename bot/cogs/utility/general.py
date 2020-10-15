@@ -2,11 +2,17 @@ import discord
 import time
 import requests
 import json
+import parsedatetime
 from discord.ext import commands
 
 from bot.bot import Bot
 from bot.utils.checks import is_dev
 from config.config import name, dmhook
+
+def ensure_length(text, desired: int, char = '0'):
+    while len(text) < desired:
+        text = char + text
+    return text
 
 
 class General(commands.Cog):
@@ -14,7 +20,8 @@ class General(commands.Cog):
 
     def __init__(self, bot: Bot):
         self.bot = bot
-        
+        self.cal = parsedatetime.Calendar()
+
     @commands.group(name="cogs")
     @is_dev()
     async def cogs_group(self, ctx: commands.Context):
@@ -139,6 +146,18 @@ class General(commands.Cog):
         webhook = await ctx.channel.create_webhook(name=str(member.name))
         await webhook.send(content=text, avatar_url=str(member.avatar_url))
         await webhook.delete()
+
+    @commands.command(name="time")
+    @is_dev()
+    async def gtime(self, ctx: commands.Context, *, tm):
+        t, tstat = self.cal.parse(tm)
+        y = t.tm_year
+        mo = ensure_length(str(t.tm_mon), 2)
+        d = ensure_length(str(t.tm_mday), 2)
+        h = ensure_length(str(t.tm_hour), 2)
+        mi = ensure_length(str(t.tm_min), 2)
+        sc = ensure_length(str(t.tm_sec), 2)
+        await ctx.send(f"{y}:{mo}:{d}@{h}:{mi}:{sc}")
 
 
 def setup(bot: Bot):
