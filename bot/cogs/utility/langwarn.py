@@ -3,6 +3,7 @@
 from discord.ext import commands
 import discord
 from googletrans import Translator, LANGUAGES
+from re import compile
 
 class Langwarn(commands.Cog):
     """Automagically tell people in their native language to speak english"""
@@ -11,6 +12,7 @@ class Langwarn(commands.Cog):
         self.bot = bot
         self.t = Translator()
         self.b = {}
+        self.emoji_regex = compile("<a?:\w+:\d+>")
         self.m = "Hi, we've noticed you're speaking {0}, and while it's awesome you can speak another language, we'd appreciate it if you spoke english here for the benefit of out moderation team, thanks!"
 
     @commands.Cog.listener()
@@ -19,6 +21,7 @@ class Langwarn(commands.Cog):
             return
         if any([role in [r.name for r in message.author.roles] for role in ["Administrator", "Moderator"]]): return
         if message.channel.id in [762748542787649586]: return
+        message.content = self.emoji_regex.sub("", message.content)
         lang = self.t.detect(message.content)
         if not lang.lang == "en":
             uid = str(message.author.id)
