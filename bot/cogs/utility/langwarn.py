@@ -37,7 +37,7 @@ class Langwarn(commands.Cog):
     @commands.has_any_role("Administrator")
     async def aaaaa(self, ctx, *, text):
         for i in range(12):
-            text = self.t.translate(text, dest=random.choice(LANGUAGES.keys()))
+            text = self.t.translate(text, dest=random.choice([key for key in LANGUAGES]))
             await asyncio.sleep(0.5)
         text = self.t.translate(text, dest="en")
         await ctx.send(text)
