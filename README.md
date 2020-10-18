@@ -2,7 +2,7 @@
 
 ### Setup for development
 
-Clone the repository and change to its directory
+- Clone the repository and change to its directory
 - Create a directory called `config`
 - Under `config/` create a new file called `config.py`
 - In this file create the following:
