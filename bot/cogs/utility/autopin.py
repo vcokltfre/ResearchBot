@@ -27,7 +27,7 @@ If you don't read this message, you'll be muted for a day.
 channel = 738836486199181312
 
 
-class Autopin(commands.Cog):
+class Autopin(commands.Cog, aaaaaa):
     """Keep a message pinned at the bottom of a channel"""
 
     def __init__(self, bot: Bot):
