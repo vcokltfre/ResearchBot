@@ -22,7 +22,7 @@ class fun(commands.Cog):
         if not content == "you love me?":
             return
         if not ctx.author.id in [297045071457681409]:
-            return await ctx.send("No, I dont")
+            return await ctx.send(f"No, I dont love you {ctx.author.mention}")
         await ctx.send("Of course I still love you")
 
     @commands.Cog.listener()
