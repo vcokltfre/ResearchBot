@@ -17,6 +17,14 @@ class fun(commands.Cog):
     def make_ascii(self, text: str):
         return ''.join([c for c in text if c in string.printable])
 
+    @commands.command(name="do")
+    async def doyouloveme(self, ctx, * content):
+        if not content == "you love me?":
+            return
+        if not ctx.author.id in [297045071457681409]:
+            return await ctx.send("No, I dont")
+        await ctx.send("Of course I still love you")
+
     @commands.Cog.listener()
     async def on_ready(self):
         self.channel = self.bot.get_channel(h_channel)
