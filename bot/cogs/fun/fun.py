@@ -18,7 +18,7 @@ class fun(commands.Cog):
         return ''.join([c for c in text if c in string.printable])
 
     @commands.command(name="do")
-    async def doyouloveme(self, ctx, * content):
+    async def doyouloveme(self, ctx, *, content):
         if not content == "you love me?":
             return
         if not ctx.author.id in [297045071457681409]:
