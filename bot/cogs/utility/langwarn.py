@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import re
 
 from discord.ext import commands
 import discord
@@ -14,24 +15,23 @@ class Langwarn(commands.Cog):
         self.t = Translator()
         self.b = {}
         self.m = "Hi, we've noticed you're speaking {0}, and while it's awesome you can speak another language, we'd appreciate it if you spoke english here for the benefit of out moderation team, thanks!"
-
+        self.emotes = re.compile(r"<:.{2,32}:[0-9]{17,19}>")
+        
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
-        if message.author == self.bot.user or len(message.content) < 12:
-            return
-        if any([role in [r.name for r in message.author.roles] for role in ["Administrator", "Moderator"]]): return
-        if message.channel.id in [762748542787649586]: return
-        lang = self.t.detect(message.content)
-        if not lang.lang == "en":
-            uid = str(message.author.id)
-            if not uid in self.b:
-                self.b[uid] = 1
-            else:
-                self.b[uid] += 1
-            if self.b[uid] >= 3:
+        content_filter = self.emotes.sub('',message.content).strip()
+        if any([message.author == self.bot.user, len(content_filter) < 12, any(role.name in ['Administrator','Moderator'] for role in message.author.roles), message.channel.id in [762748542787649586]]):
+            return      
+        
+        lang = self.t.detect(content_filter)
+        if not lang.lang == 'en':
+            user_id = str(message.author.id)
+            self.b[user_id] = 1 if user_id not in self.b else self.b[user_id] + 1
+ 
+            if self.b[user_id] >= 3:
                 text = self.t.translate(self.m.format(LANGUAGES[lang.lang.lower()]), dest=lang.lang)
                 await message.channel.send(text.text, delete_after=20)
-                del self.b[uid]
+                del self.b[user_id]
 
     @commands.command(name="aaaaa")
     @commands.has_any_role("Administrator")
