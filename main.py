@@ -14,5 +14,6 @@ run([
     "bot.cogs.fun.stonks",
     "bot.cogs.ext.cog",
     "bot.cogs.fun.imdec",
+    "bot.cogs.minecraft.seedfinder",
     "jishaku"
 ], False)
