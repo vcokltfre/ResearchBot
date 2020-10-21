@@ -8,7 +8,7 @@ rgb_people = [256251362260549632, 738981683516145785]
 h_channel = 756100804892557372
 
 
-class fun(commands.Cog):
+class Fun(commands.Cog):
 
     def __init__(self, bot: Bot):
         self.bot = bot
@@ -52,4 +52,4 @@ class fun(commands.Cog):
 
 
 def setup(bot: Bot):
-    bot.add_cog(fun(bot))
+    bot.add_cog(Fun(bot))
