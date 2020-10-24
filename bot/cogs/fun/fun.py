@@ -23,7 +23,7 @@ class Fun(commands.Cog):
             self.bot.logger.warn("Failed to load quotes")
 
     def make_ascii(self, text: str):
-        return ''.join([c for c in text if c in string.printable])
+        return ''.join([c for c in text if c in string.ascii_letters])
 
     @commands.command(name="do")
     async def doyouloveme(self, ctx, *, content):
