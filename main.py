@@ -10,7 +10,7 @@ run([
     "bot.cogs.utility.autopin",
     #"bot.cogs.utility.langwarn",
     "bot.cogs.utility.automod",
-    "bot.cogs.utility.rankup"
+    "bot.cogs.utility.rankup",
     "bot.cogs.fun.fun",
     "bot.cogs.fun.stonks",
     "bot.cogs.ext.cog",
