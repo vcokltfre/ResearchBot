@@ -46,10 +46,8 @@ class Fun(commands.Cog):
         if message.author.id in rgb_people:
             if "rgb" in self.make_ascii(message.content.lower()):
                 await message.channel.send("RGB makes your PC faster")
-        if message.channel.id == h_channel and not message.content == 'h':
-            await message.delete()
-        if message.channel.id == h_channel and len(message.attachments) != 0:
-            await message.delete()
+        if random.randint(0,100) == 69:
+            await message.add_reaction("👀")
 
     @commands.Cog.listener()
     async def on_message_edit(self, before, after):
