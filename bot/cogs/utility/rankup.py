@@ -35,7 +35,7 @@ class Rankup(commands.Cog):
                 return user == ctx.author and str(reaction.emoji) in ["1️⃣", "2️⃣"]
 
             try:
-                reaction, user = await Bot.wait_for(self.bot, event='reaction_add', timeout=60.0, check=check)
+                reaction, user = await self.bot.wait_for(self.bot, event='reaction_add', timeout=60.0, check=check)
             except:
                 pass
 
