@@ -51,7 +51,7 @@ class Fun(commands.Cog):
 
         if message.author.id == 297045071457681409:
             await message.delete()
-            await message.channel.send("Do your work dummy", delete_after=10)
+            await message.channel.send("Do your work dummy. GO TAKE A BREAK", delete_after=10)
 
     @commands.Cog.listener()
     async def on_message_edit(self, before, after):
