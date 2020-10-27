@@ -8,7 +8,7 @@ class AntiMassPing(commands.Cog):
 
     @commands.Cog.listener(name="on_message")
     async def mess(self,message_object):
-        if any(role_check in ['Big Brain','Moderator','Administrator'] for role_check in [role.name for role in message_object.author.roles]):
+        if any(role_check in ['Private Chat Access', 'Moderator', 'Administrator', 'Staff'] for role_check in [role.name for role in message_object.author.roles]):
             return
         matches = set(message_object.mentions)
         if len(matches) < self.max_mentions:

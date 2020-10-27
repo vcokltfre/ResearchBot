@@ -28,7 +28,7 @@ class Links(commands.Cog):
                 return await message.delete()
 
     @commands.command()
-    @commands.has_any_role("Administrator", "Moderator", "Big Brain")
+    @commands.has_any_role("Private Chat Access", "Moderator", "Administrator", "Staff")
     async def shorturl(self, ctx, url, short=None):
         """ creates a short mcatho.me url """
         try:
@@ -45,7 +45,7 @@ class Links(commands.Cog):
             await ctx.send("The keyword probably already exists! `"+short+"`", delete_after=10)
 
     @commands.command()
-    @commands.has_any_role("Administrator", "Moderator", "Big Brain")
+    @commands.has_any_role("Private Chat Access", "Moderator", "Administrator", "Staff")
     async def urlstats(self, ctx, url=None):
         """ Get Stats from shortend URL's """
         if url == None:
