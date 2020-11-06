@@ -8,6 +8,7 @@ run([
     "bot.cogs.utility.emoji",
     "bot.cogs.utility.antimassping",
     "bot.cogs.utility.autopin",
+    "bot.cogs.utility.server",
     #"bot.cogs.utility.langwarn",
     "bot.cogs.utility.automod",
     "bot.cogs.fun.fun",
