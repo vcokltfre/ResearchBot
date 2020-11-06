@@ -5,6 +5,7 @@ from pathlib import Path
 
 from bot.bot import Bot
 from bot.utils.image import make_image, make_text
+from config.config import command_roles
 
 
 class Images(commands.Cog):
@@ -23,7 +24,7 @@ class Images(commands.Cog):
         return parts.pop() in ["jpg", "bmp", "jpeg", "png"]
 
     @commands.group(name="image", aliases=["i", "im"])
-    @commands.has_any_role("Administrator", "Moderator")
+    @commands.has_any_role(*command_roles.lvl3roles)
     async def img_grp(self, ctx: commands.Context):
         if ctx.invoked_subcommand == None:
             if len(ctx.message.attachments) == 1:

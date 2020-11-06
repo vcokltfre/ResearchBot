@@ -6,6 +6,7 @@ from discord.ext import commands
 
 from bot.bot import Bot
 from config.config import yourlspw
+from config.config import command_roles
 
 
 class Links(commands.Cog):
@@ -16,7 +17,7 @@ class Links(commands.Cog):
         self.yourls = pyourls3.Yourls(addr='https://mcatho.me/yourls-api.php', user='bot', passwd=yourlspw)
 
     async def check(self, message):
-        if any(role_check in ['Moderator','Administrator'] for role_check in [role.name for role in message.author.roles]):
+        if any(role_check in [*command_roles.lvl3roles] for role_check in [role.name for role in message.author.roles]):
             return
         
         if self.bot.user == message.author:
@@ -28,7 +29,7 @@ class Links(commands.Cog):
                 return await message.delete()
 
     @commands.command()
-    @commands.has_any_role("Administrator", "Moderator", "Big Brain")
+    @commands.has_any_role(*command_roles.lvl2roles)
     async def shorturl(self, ctx, url, short=None):
         """ creates a short mcatho.me url """
         try:
@@ -45,7 +46,7 @@ class Links(commands.Cog):
             await ctx.send("The keyword probably already exists! `"+short+"`", delete_after=10)
 
     @commands.command()
-    @commands.has_any_role("Administrator", "Moderator", "Big Brain")
+    @commands.has_any_role(*command_roles.lvl2roles)
     async def urlstats(self, ctx, url=None):
         """ Get Stats from shortend URL's """
         if url == None:
@@ -62,7 +63,7 @@ class Links(commands.Cog):
                 await ctx.send("The keyword/shorturl probably doesn't exist! `"+url+"`", delete_after=10)
 
     @commands.command(name="whois")
-    @commands.has_any_role("Administrator", "Moderator")
+    @commands.has_any_role(*command_roles.lvl2roles)
     async def whois_lookup(self, ctx: commands.Context, domain: str):
         domain = whois.query(domain)
 

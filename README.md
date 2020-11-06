@@ -15,6 +15,13 @@ hook = 'logging webhook url'
 dev_ids = [your_discord_id]
 guild = your_guild_id
 
+class command_roles:
+    lvl1roles = ['Administrator', 'Moderator', 'Senior Moderator', 'Staff', 'Private Project Access',
+                'Private Chat Access']
+    lvl2roles = ['Administrator', 'Moderator', 'Senior Moderator', 'Staff', 'Private Project Access']
+    lvl3roles = ['Administrator', 'Moderator', 'Senior Moderator', 'Staff']
+    lvl4roles = ['Administrator']
+
 nick_request_channel_id = channel_id
 nick_accept_channel_id = channel_id
 
