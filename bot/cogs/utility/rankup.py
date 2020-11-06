@@ -37,7 +37,8 @@ class Rankup(commands.Cog):
             try:
                 reaction, user = await self.bot.wait_for('reaction_add', timeout=60.0, check=check)
             except:
-                print("Reaction menu on member rankup timed out")
+                await msg.edit(content="Member rankup menu timed out.")
+                return
 
             if str(reaction.emoji) == "1️⃣":
                 await self.rankup_user(ctx, usr, 'Member')
