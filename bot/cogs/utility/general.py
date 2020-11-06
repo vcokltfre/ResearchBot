@@ -90,7 +90,7 @@ class General(commands.Cog):
         await self.bot.close()
 
     @commands.command(name="ping")
-    @commands.has_any_role(command_roles.lvl2roles)
+    @commands.has_any_role(*command_roles.lvl2roles)
     async def ping(self, ctx: commands.Context, p: int = 2):
         t_start = time.time()
         m = await ctx.channel.send("Testing RTT for message editing.")

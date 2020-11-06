@@ -17,7 +17,7 @@ class SeedParse(commands.Cog):
             Path("./tmp/").mkdir()
 
     @commands.group(name="mc")
-    @commands.has_any_role(command_roles.lvl1roles)
+    @commands.has_any_role(*command_roles.lvl1roles)
     async def mc_g(self, ctx: commands.Context):
         pass
 
