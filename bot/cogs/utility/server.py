@@ -44,7 +44,6 @@ class Server(commands.Cog):
             ls.append(data)
             self.sp.data = ls
             self.sp.write()
-            await message.delete()
             await message.channel.send("Your suggestion has been recorded and will be discussed in the next server meeting!", delete_after=15)
 
 
