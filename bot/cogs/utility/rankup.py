@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 
 from bot.bot import Bot
+from config.config import command_roles
 
 
 class Rankup(commands.Cog):
@@ -14,7 +15,7 @@ class Rankup(commands.Cog):
         await ctx.send(f"{user.mention} has been given the {role} role")
 
     @commands.command(name='rankup')
-    @commands.has_any_role('Administrator', 'Moderator', 'Staff', 'Private Project Access', 'Private Chat Access')
+    @commands.has_any_role(command_roles.lvl1roles)
     async def rankup(self, ctx: commands.Context, *args):
         usr = await commands.MemberConverter().convert(ctx, args[-1])
 
@@ -22,10 +23,10 @@ class Rankup(commands.Cog):
             await self.rankup_user(ctx, usr, 'Member')
 
         elif args[0] in ['Project Contributor', 'PC', 'pc'] \
-                and commands.has_any_role('Administrator', 'Moderator', 'Staff', 'Private Project Access'):
+                and commands.has_any_role(command_roles.lvl2roles):
             await self.rankup_user(ctx, usr, 'Member')
 
-        elif commands.has_any_role('Administrator', 'Moderator', 'Staff', 'Private Project Access'):
+        elif commands.has_any_role(command_roles.lvl2roles):
             msg = await ctx.send(f"Select the role you want to give {usr.mention}\n"
                                  f"Select 1️⃣ for Member\nSelect 2️⃣ for Project Contributor")
             await msg.add_reaction("1️⃣")

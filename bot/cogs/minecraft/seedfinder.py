@@ -5,6 +5,7 @@ from pathlib import Path
 from discord.ext import commands
 
 from bot.bot import Bot
+from config.config import command_roles
 
 
 class SeedParse(commands.Cog):
@@ -16,7 +17,7 @@ class SeedParse(commands.Cog):
             Path("./tmp/").mkdir()
 
     @commands.group(name="mc")
-    @commands.has_any_role("Private Chat Access", "Moderator", "Administrator", "Staff")
+    @commands.has_any_role(command_roles.lvl1roles)
     async def mc_g(self, ctx: commands.Context):
         pass
 
