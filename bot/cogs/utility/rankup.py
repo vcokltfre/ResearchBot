@@ -27,7 +27,7 @@ class Rankup(commands.Cog):
 
         elif commands.has_any_role('Administrator', 'Moderator', 'Staff', 'Private Project Access'):
             msg = await ctx.send(f"Select the role you want to give {usr.mention}\n"
-                                 f"Select 1 for Member or 2 for Project Contributor")
+                                 f"Select 1️⃣ for Member\nSelect 2️⃣ for Project Contributor")
             await msg.add_reaction("1️⃣")
             await msg.add_reaction("2️⃣")
 
@@ -35,7 +35,7 @@ class Rankup(commands.Cog):
                 return user == ctx.author and str(reaction.emoji) in ["1️⃣", "2️⃣"]
 
             try:
-                reaction, user = await self.bot.wait_for(self.bot, event='reaction_add', timeout=60.0, check=check)
+                reaction, user = await self.bot.wait_for('reaction_add', timeout=60.0, check=check)
             except:
                 pass
 
