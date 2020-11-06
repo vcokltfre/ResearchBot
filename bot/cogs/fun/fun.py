@@ -49,10 +49,6 @@ class Fun(commands.Cog):
         if random.randint(0,100) == 69:
             await message.add_reaction("👀")
 
-        if message.author.id == 297045071457681409:
-            await message.delete()
-            await message.channel.send("Do your work dummy", delete_after=10)
-
     @commands.Cog.listener()
     async def on_message_edit(self, before, after):
         if after.channel.id == h_channel:
