@@ -16,6 +16,8 @@ dev_ids = [your_discord_id]
 guild = your_guild_id
 
 class command_roles:
+    lvl0roles = ['Administrator', 'Moderator', 'Senior Moderator', 'Staff', 'Private Project Access',
+                'Private Chat Access', 'Member']
     lvl1roles = ['Administrator', 'Moderator', 'Senior Moderator', 'Staff', 'Private Project Access',
                 'Private Chat Access']
     lvl2roles = ['Administrator', 'Moderator', 'Senior Moderator', 'Staff', 'Private Project Access']
