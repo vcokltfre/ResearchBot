@@ -3,6 +3,7 @@ __pycache__/
 config/
 data/
 .idea
+venv/
 .DS_Store
 extensions/
 tmp/
