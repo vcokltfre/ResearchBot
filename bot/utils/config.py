@@ -3,13 +3,13 @@ from pathlib import Path
 
 
 class ConfigUtil:
-    def __init__(self, config_location = "./config/persistent.json"):
+    def __init__(self, config_location = "./config/persistent.json", initial={}):
         self.loc = Path(config_location)
         self.data = None
 
         if not self.loc.exists():
             with self.loc.open('w') as f:
-                json.dump({}, f)
+                json.dump(initial, f)
 
         with self.loc.open() as f:
             self.data = json.load(f)
