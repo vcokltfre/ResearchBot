@@ -14,6 +14,13 @@ class Rankup(commands.Cog):
         await user.add_roles(discord.utils.get(user.guild.roles, name=role))
         await ctx.send(f"{user.mention} has been given the {role} role")
 
+    def check(self, member: discord.Member, rolz: list):
+        roles = [role.name for role in member.roles]
+        for role in roles:
+            if role in rolz:
+                return True
+        return False
+
     @commands.command(name='rankup')
     @commands.has_any_role(*command_roles.lvl1roles)
     async def rankup(self, ctx: commands.Context, *args):
@@ -22,11 +29,10 @@ class Rankup(commands.Cog):
         if args[0] in ['Member', 'M', 'm']:
             await self.rankup_user(ctx, usr, 'Member')
 
-        elif args[0] in ['Project Contributor', 'PC', 'pc'] \
-                and commands.has_any_role(*command_roles.lvl2roles):
-            await self.rankup_user(ctx, usr, 'Member')
+        elif args[0] in ['Project Contributor', 'PC', 'pc'] and self.check(ctx.author, command_roles.lvl2roles):
+            await self.rankup_user(ctx, usr, 'Project Contributor')
 
-        elif commands.has_any_role(*command_roles.lvl2roles):
+        elif self.check(ctx.author, command_roles.lvl2roles):
             msg = await ctx.send(f"Select the role you want to give {usr.mention}\n"
                                  f"Select 1️⃣ for Member\nSelect 2️⃣ for Project Contributor")
             await msg.add_reaction("1️⃣")
