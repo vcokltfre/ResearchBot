@@ -14,6 +14,7 @@ run([
     "bot.cogs.utility.rankup",
     "bot.cogs.fun.fun",
     "bot.cogs.fun.stonks",
+    "bot.cogs.fun.lmgtfy",
     "bot.cogs.ext.cog",
     "bot.cogs.fun.imdec",
     "bot.cogs.minecraft.seedfinder",

@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 
+from config.config import command_roles
+
 class AntiMassPing(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
@@ -8,7 +10,7 @@ class AntiMassPing(commands.Cog):
 
     @commands.Cog.listener(name="on_message")
     async def mess(self,message_object):
-        if any(role_check in ['Big Brain','Moderator','Administrator'] for role_check in [role.name for role in message_object.author.roles]):
+        if any(role_check in [*command_roles.lvl2roles] for role_check in [role.name for role in message_object.author.roles]):
             return
         matches = set(message_object.mentions)
         if len(matches) < self.max_mentions:
