@@ -1,0 +1,145 @@
+{
+    "tos": [
+      {
+        "names": ["harass", "ridicule"],
+        "content": "defame, libel, ridicule, mock, stalk, threaten, harass, intimidate or abuse anyone."
+      },
+      {
+        "names": ["fraud", "illegal"],
+        "content": "engage in conduct that is fraudulent or illegal or otherwise harmful to Discord or any other user."
+      },
+      {
+        "names": ["virus", "trojan"],
+        "content": "upload or transmit (or attempt to upload or transmit) files that contain viruses, Trojan horses, worms, time bombs, cancelbots, corrupted files or data, or any other similar software or programs or engage in any other activity that may damage the operation of the Service or other users' computers."
+      },
+      {
+        "names": ["property", "trademark"],
+        "content": "violate the contractual, personal, intellectual property or other rights of any party including using, uploading, transmitting, distributing, or otherwise making available any information made available through the Service in any manner that infringes any copyright, trademark, patent, trade secret, or other right of any party (including rights of privacy or publicity)."
+      },
+      {
+        "names": ["passwords", "password"],
+        "content": "attempt to obtain passwords or other private information from other members."
+      },
+      {
+        "names": ["auto", "macro"],
+        "content": "develop, distribute, or publicly inform other members of \"auto\" software programs, \"macro\" software programs or other \"cheat utility\" software program or applications in violation of the applicable license agreements."
+      },
+      {
+        "names": ["exploit", "hacks", "cheat", "dupe", "crack", "hack"],
+        "content": "exploit, distribute or publicly inform other members of any game error, miscue or bug which gives an unintended advantage; violate any applicable laws or regulations; or promote or encourage illegal activity including, but not limited to, hacking, cracking or distribution of counterfeit software, compromised accounts, or cheats or hacks for the Service."
+      },
+      {
+        "names": ["age", "under13"],
+        "content": "By using or accessing the Discord application (the 'App') or the website located at https://discord.com (the \"Site\"), which are collectively referred to as the 'Service,' you agree (i) that you are 13 years of age and the minimum age of digital consent in your country, (ii) if you are the age of majority in your jurisdiction or over, that you have read, understood, and accept to be bound by the Terms, and (iii) if you are between 13 (or the minimum age of digital consent, as applicable) and the age of majority in your jurisdiction, that your legal guardian has reviewed and agrees to these Terms."
+      }
+    ],
+    "dgl": [
+      {
+        "names": ["harass", "harassment", "toxic", "toxicity"],
+        "content": "Do not organize, participate in, or encourage harassment of others. Disagreements happen and are normal, but continuous, repetitive, or severe negative comments may cross the line into harassment and are not okay."
+      },
+      {
+        "names": [
+          "hate",
+          "hatespeech",
+          "sexist",
+          "sexism",
+          "gender",
+          "religion",
+          "religious",
+          "disability",
+          "disabled",
+          "race",
+          "racism",
+          "transphobia",
+          "transphobic",
+          "homophobic",
+          "homopohobia",
+          "ethnicity"
+        ],
+        "content": "Do not organize, promote, or coordinate servers around hate speech. It\u2019s unacceptable to attack a person or a community based on attributes such as their race, ethnicity, national origin, sex, gender, sexual orientation, religious affiliation, or disabilities."
+      },
+      {
+        "names": [
+          "violent",
+          "violence",
+          "threat",
+          "threaten",
+          "doxing",
+          "doxxing",
+          "private"
+        ],
+        "content": "Do not make threats of violence or threaten to harm others. This includes indirect threats, as well as sharing or threatening to share someone\u2019s private personal information (also known as doxxing)."
+      },
+      {
+        "names": ["blocks", "bans", "evade", "circumvent"],
+        "content": "Do not evade user blocks or server bans. Do not send unwanted, repeated friend requests or messages, especially after they\u2019ve made it clear they don\u2019t want to talk to you anymore. Do not try to hide your identity in an attempt to contact someone who has blocked you, or otherwise circumvent the tools we have which enable users to protect themselves."
+      },
+      {
+        "names": [
+          "vrius",
+          "malware",
+          "worm",
+          "trojan",
+          "phish",
+          "phishing",
+          "ddos",
+          "dos"
+        ],
+        "content": "Do not send others viruses or malware, attempt to phish others, or hack or DDoS them."
+      },
+      {
+        "names": ["minors", "loli", "lolicon", "shotacon", "cub"],
+        "content": "You may not sexualize minors in any way. This includes sharing content or links which depict minors in a pornographic, sexually suggestive, or violent manner, and includes illustrated or digitally altered pornography that depicts minors (such as lolicon, shotacon, or cub). We report illegal content to the National Center for Missing and Exploited Children."
+      },
+      {
+        "names": ["explicit", "consent", "revenge", "degrade", "degradation"],
+        "content": "You may not share sexually explicit content of other people without their consent, or share or promote sharing of non-consensual intimate imagery (also known as revenge porn) in an attempt to shame or degrade someone."
+      },
+      {
+        "names": ["suicide", "selfharm", "anorexia", "bulimia"],
+        "content": "You may not share content that glorifies or promotes suicide or self-harm, including any encouragement to others to cut themselves, or embrace eating disorders such as anorexia or bulimia."
+      },
+      {
+        "names": ["gore", "sadistic", "animalcruelty", "cruelty"],
+        "content": "You may not share images of sadistic gore or animal cruelty."
+      },
+      {
+        "names": ["extremism"],
+        "content": "You may not use Discord for the organization, promotion, or support of violent extremism."
+      },
+      {
+        "names": [
+          "hack",
+          "crack",
+          "hacking",
+          "cracking",
+          "pirate",
+          "pirated",
+          "stolen",
+          "steal",
+          "accounts",
+          "cheat",
+          "cheats",
+          "cheating"
+        ],
+        "content": "You may not promote, distribute, or provide access to content involving the hacking, cracking, or distribution of pirated software or stolen accounts. This includes sharing or selling cheats or hacks that may negatively affect others in multiplayer games."
+      },
+      {
+        "names": ["illegal"],
+        "content": "In general, you should not promote, encourage or engage in any illegal behavior. This is very likely to get you kicked off Discord, and may get you reported to law enforcement."
+      },
+      {
+        "names": ["selfbot", "userbot"],
+        "content": "You may not use self-bots or user-bots to access Discord."
+      },
+      {
+        "names": ["copyright", "property"],
+        "content": "You may not share content that violates anyone's intellectual property or other rights."
+      },
+      {
+        "names": ["spam", "reports"],
+        "content": "You may not spam Discord, especially our Customer Support and Trust & Safety teams. Making false and malicious reports, sending multiple reports about the same issue, or asking a group of users to all report the same content may lead to action being taken on your account."
+      }
+    ]
+  }
