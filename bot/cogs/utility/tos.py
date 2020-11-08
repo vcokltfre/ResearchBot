@@ -12,8 +12,10 @@ class Status(commands.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
         toscfg = ConfigUtil("./static/tos.json")
-        tos = toscfg.get_attr("tos")
-        dgl = toscfg.get_attr("dgl")
+        tos = toscfg.read()['tos']
+        dgl = toscfg.read()['dgl']
+
+        print(tos, dgl)
 
         tmp = []
         for item in tos:
@@ -31,9 +33,9 @@ class Status(commands.Cog):
             await ctx.send("That item wasn't a valid entry.", delete_after=10)
             return
 
-
         content = self.entries[entry]
         await ctx.send(f"> {content}")
+
 
 def setup(bot: Bot):
     bot.add_cog(Status(bot))
