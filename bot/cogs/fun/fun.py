@@ -48,6 +48,8 @@ class Fun(commands.Cog):
                 await message.channel.send("RGB makes your PC faster")
         if random.randint(0,100) == 69:
             await message.add_reaction("👀")
+        if message.content == "@someone":
+            await message.channel.send(f"<@!{random.choice(message.guild.members).id}>")
 
     @commands.Cog.listener()
     async def on_message_edit(self, before, after):
