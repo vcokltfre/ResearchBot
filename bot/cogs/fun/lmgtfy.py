@@ -1,4 +1,5 @@
 import discord
+import re
 from discord.ext import commands
 
 from bot.bot import Bot
@@ -13,7 +14,12 @@ class Lmgtfy(commands.Cog):
     @commands.command(name='lmgtfy')
     @commands.has_any_role(*command_roles.lvl0roles)
     async def lmgtfy(self, ctx: commands.Context, *args):
+        for arg in args:
+            if re.match('<@.?[0-9]*?>', arg) or arg in ["@here", "@everyone"]:
+                await ctx.send(f"{ctx.author.mention} thinks they are smart")
+                return
         await ctx.send(f"https://lmgtfy.app/?q={'+'.join(args)}")
+
 
 def setup(bot: Bot):
     bot.add_cog(Lmgtfy(bot))
