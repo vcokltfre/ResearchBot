@@ -7,7 +7,8 @@ from config.config import command_roles
 
 
 class Lmgtfy(commands.Cog):
-
+    """A cog for the lazy ones, Pythagoras_314"""
+    
     def __init__(self, bot: Bot):
         self.bot = bot
 
@@ -16,7 +17,7 @@ class Lmgtfy(commands.Cog):
     async def lmgtfy(self, ctx: commands.Context, *args):
         for arg in args:
             if re.match('<@.?[0-9]*?>', arg) or arg in ["@here", "@everyone"]:
-                await ctx.send(f"{ctx.author.mention} thinks they are smart")
+                await ctx.send(f"{ctx.author.mention}, you dumb shit stop it.")
                 return
         await ctx.send(f"https://lmgtfy.app/?q={'+'.join(args)}")
 
