@@ -23,7 +23,7 @@ class Lmgtfy(commands.Cog):
     @commands.has_any_role(*command_roles.lvl0roles)
     async def lmgtfy(self, ctx: commands.Context, *args):
         for arg in args:
-            if re.match('<@.?[0-9]*?>', arg) or arg in ["@here", "@everyone"]:
+            if re.match("<@.?[0-9]*?>|@everyone|@here", arg):
                 await ctx.send(f"{ctx.author.mention}{random.choice(self.insult)}")
                 return
         await ctx.send(f"https://lmgtfy.app/?q={'+'.join(args)}")
