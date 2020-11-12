@@ -19,6 +19,9 @@ class Links(commands.Cog):
     async def check(self, message):
         if any(role_check in [*command_roles.lvl3roles] for role_check in [role.name for role in message.author.roles]):
             return
+
+        if message.author.id == 171037767051116544:
+            return
         
         if self.bot.user == message.author:
             return
