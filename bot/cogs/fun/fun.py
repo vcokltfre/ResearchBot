@@ -3,6 +3,7 @@ import string
 import random
 from pathlib import Path
 from discord.ext import commands
+from discord.utils import get
 
 from bot.bot import Bot
 
@@ -61,6 +62,13 @@ class Fun(commands.Cog):
         if payload.channel_id == h_channel:
             mess = await self.channel.fetch_message(payload.message_id)
             await mess.delete()
+
+    @commands.command(name="muteme")
+    @commands.guild_only()
+    async def mute_me(self, ctx):
+        mr = get(ctx.guild.roles, name="Muted")
+        await ctx.author.add_roles(mr)
+        await ctx.send("Okie")
 
 
 def setup(bot: Bot):
