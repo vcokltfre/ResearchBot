@@ -10,6 +10,7 @@ run([
     "bot.cogs.utility.autopin",
     "bot.cogs.utility.server",
     "bot.cogs.utility.tos",
+    "bot.cogs.utility.newalert",
     #"bot.cogs.utility.langwarn",
     "bot.cogs.utility.automod",
     "bot.cogs.utility.rankup",
