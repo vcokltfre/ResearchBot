@@ -20,10 +20,15 @@ class Server(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member: discord.Member):
         jt = deconstruct(member.id)
-
-        if jt + WEEK > time():
+        dt = int(time()) - jt
+        
+        if dt < WEEK:
             ch = self.bot.get_channel(ACH)
-            await ch.send(f"NEW USER: {member.mention} was created in the last week! ({member.id})")
+            s = dt % 60
+            m = (dt // 60) % 60
+            h = (dt // 3600) % 24
+            d = (dt // 86400) % 7
+            await ch.send(f"NEW USER: {member.mention} ({member.id}) was created in the last week! ({d}d {h}h {m}m {s}s ago)")
 
 
 def setup(bot: Bot):
