@@ -14,6 +14,11 @@ class Rankup(commands.Cog):
         await user.add_roles(discord.utils.get(user.guild.roles, name=role))
         await ctx.send(f"{user.mention} has been given the {role} role")
 
+    async def rankdown_user(self, ctx, user: discord.Member, roles: list):
+        for role in roles:
+            await user.remove_roles(discord.utils.get(user.guild.roles, name=role))
+        await ctx.send(f"{user.mention}'s roles have been removed")
+
     def check(self, member: discord.Member, rolz: list):
         roles = [role.name for role in member.roles]
         for role in roles:
@@ -56,6 +61,14 @@ class Rankup(commands.Cog):
 
         else:
             await self.rankup_user(ctx, usr, 'Member')
+
+    @commands.command(name="rankdown", aliases=["yeetroles, powah"])
+    @commands.has_any_role(*command_roles.lvl1roles)
+    async def rankdown(self, ctx: commands.Context, user: discord.Member):
+        if self.check(ctx.author, command_roles.lvl2roles):
+            await self.rankdown_user(ctx, user, ['Project Contributor', 'Member'])
+        else:
+            await self.rankdown_user(ctx, user, ['Member'])
 
 
 def setup(bot: Bot):
