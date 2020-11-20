@@ -62,7 +62,7 @@ class Rankup(commands.Cog):
         else:
             await self.rankup_user(ctx, usr, 'Member')
 
-    @commands.command(name="rankdown", aliases=["yeetroles, powah"])
+    @commands.command(name="powah", aliases=["yeetroles, rankdown"])
     @commands.has_any_role(*command_roles.lvl1roles)
     async def rankdown(self, ctx: commands.Context, user: discord.Member):
         if self.check(ctx.author, command_roles.lvl2roles):
