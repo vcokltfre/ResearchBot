@@ -2,9 +2,12 @@ import discord
 import re
 import random
 from discord.ext import commands
+from urllib.parse import quote_plus
 
 from bot.bot import Bot
 from config.config import command_roles
+
+mention = re.compile(r"<@.?[0-9]*?>|@everyone|@here")
 
 
 class Lmgtfy(commands.Cog):
@@ -21,11 +24,11 @@ class Lmgtfy(commands.Cog):
 
     @commands.command(name='lmgtfy')
     @commands.has_any_role(*command_roles.lvl0roles)
-    async def lmgtfy(self, ctx: commands.Context, *args):
-        if re.match("<@.?[0-9]*?>|@everyone|@here", *args):
+    async def lmgtfy(self, ctx: commands.Context, *, query):
+        if mention.match(query):
             await ctx.send(f"{ctx.author.mention}{random.choice(self.insult)}")
             return
-        await ctx.send(f"https://lmgtfy.app/?q={'+'.join(args)}")
+        await ctx.send(f"https://lmgtfy.app/?q={quote_plus(query)}")
 
 
 def setup(bot: Bot):
