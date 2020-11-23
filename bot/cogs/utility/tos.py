@@ -3,7 +3,16 @@ from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
 
 from bot.bot import Bot
+from config.config import command_roles
 from bot.utils.config import ConfigUtil
+
+
+def check(member: discord.Member, rolz: list):
+    roles = [role.name for role in member.roles]
+    for role in roles:
+        if role in rolz:
+            return True
+    return False
 
 
 class Status(commands.Cog):
@@ -35,6 +44,11 @@ class Status(commands.Cog):
 
         content = self.entries[entry]
         await ctx.send(f"> {content}")
+
+    @tos.after_invoke
+    async def reset_cooldown(self, ctx):
+        if check(ctx.author, command_roles.lvl1roles):
+            self.tos.reset_cooldown(ctx)
 
 
 def setup(bot: Bot):
