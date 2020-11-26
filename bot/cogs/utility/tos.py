@@ -7,10 +7,10 @@ from config.config import command_roles
 from bot.utils.config import ConfigUtil
 
 
-def check(member: discord.Member, rolz: list):
+def check(member: discord.Member, allowed_roles: list):
     roles = [role.name for role in member.roles]
     for role in roles:
-        if role in rolz:
+        if role in allowed_roles:
             return True
     return False
 
