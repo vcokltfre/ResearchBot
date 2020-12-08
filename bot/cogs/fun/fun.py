@@ -49,7 +49,7 @@ class Fun(commands.Cog):
                 await message.channel.send("RGB makes your PC faster")
         if random.randint(0,100) == 69:
             await message.add_reaction("👀")
-        if random.randint(0,150) == 68 or message.author.id == 243233669148442624:
+        if random.randint(0,150) == 68:
             await message.add_reaction("🤪")
         if message.content == "@someone" and message.author.id == 297045071457681409:
             await message.channel.send(f"<@!{random.choice(message.guild.members).id}>")
