@@ -14,7 +14,7 @@ __**BUT!** There's a few things you should consider before suggesting something:
 :mag_right: A lot of seeds are already publicly known! Please look stuff up on Google before you suggest it.
 :thinking: Consider if what you're suggesting has any significance, be it historical or technical.
 :x: **Blatant duplicates and spam will get deleted without notice!** Otherwise you'll get notified in <#738860957685776395> if there are any problems.
-__Common suggestions include:__ All the panoramas (we'll work on them later), MC Trailer (<#756961269738766527>), Herobrine picture (<#751840431595192512>) Yogscast seed (4090136037452000329), DanTDM's lab seed (5021019576385777538), and various MC renders.
+__Common suggestions include:__  MC Trailer (<#756961269738766527>), Herobrine picture (<#751840431595192512>) Yogscast seed (4090136037452000329), DanTDM's lab seed (5021019576385777538), and various MC renders.
 For more info, check the pinned messages, if you clearly haven't checked pinned messages and suggest something mentioned in one, your access to the suggestions channel may be removed.
 
 ***DO NOT*** suggest the seed for the Smash Ultimate backgrounds. You will be muted.
