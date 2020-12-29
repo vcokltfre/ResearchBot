@@ -7,7 +7,8 @@ from config.config import nick_request_channel_id as request_channel_id
 from config.config import nick_accept_channel_id as accept_channel_id
 
 command_timeout = 600
-allowed_list = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;?@[\\]^_`{|}~ 🎃👻'
+allowed_list = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;?@[\\]^_`{|}~ '
+emoji_percentage = 0.4
 
 
 class Nickrequest(commands.Cog):
@@ -24,8 +25,6 @@ class Nickrequest(commands.Cog):
         nick.replace('"', '\"')
         nick.replace("'", "\'")
 
-        nick = ''.join(allowed_character for allowed_character in nick if allowed_character in allowed_list)
-
         if not nick:
             await ctx.send(f'{ctx.author.mention}, please mention a nick to change to.', delete_after=5)
             await ctx.message.delete()
@@ -37,6 +36,15 @@ class Nickrequest(commands.Cog):
 
         if len(nick) > 32:
             await ctx.send(f'{ctx.author.mention}, please mention a nick with 32 characters or less.', delete_after=5)
+            await ctx.message.delete()
+            return
+
+        special = 0
+        for char in nick:
+            if char not in allowed_list:
+                special += 1
+        if special / len(nick) >= emoji_percentage:
+            await ctx.send(f'{ctx.author.mention}, please use a pingable nickname.', delete_after=5)
             await ctx.message.delete()
             return
 
