@@ -48,7 +48,7 @@ class Fun(commands.Cog):
             if "rgb" in self.make_ascii(message.content.lower()):
                 await message.channel.send("RGB makes your PC faster")
         if random.randint(0,100) == 69:
-            await message.add_reaction("👀")
+            await message.reply("👀")
         #if random.randint(0,150) == 68:
         #    await message.add_reaction("🤪")
         if message.content == "@someone" and message.author.id == 297045071457681409:
