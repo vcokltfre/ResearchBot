@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from typing import Optional
 
 from bot.bot import Bot
 from config.config import command_roles
@@ -21,41 +22,48 @@ class Rankup(commands.Cog):
                 return True
         return False
 
-    @commands.command(name='rankup')
+    @commands.group(name="rankup")
     @commands.has_any_role(*command_roles.lvl1roles)
-    async def rankup(self, ctx: commands.Context, *args):
-        usr = await commands.MemberConverter().convert(ctx, args[-1])
+    async def rankup(self, ctx: commands.Context, *, user: Optional[discord.Member]):
+        if not ctx.invoked_subcommand and user:
+            if not self.check(ctx.author, command_roles.lvl2roles):
+                return await self.rankup_member(ctx, user)
+            return await self.auto(ctx, user)
 
-        if args[0] in ['Member', 'M', 'm']:
-            await self.rankup_user(ctx, usr, 'Member')
+    @rankup.command(name="Member", aliases=["M", "m", "member"])
+    async def rankup_member(self, ctx, user: discord.Member):
+        await self.rankup_user(ctx, user, 'Member')
 
-        elif args[0] in ['Project Contributor', 'PC', 'pc'] and self.check(ctx.author, command_roles.lvl2roles):
-            await self.rankup_user(ctx, usr, 'Project Contributor')
+    @rankup.command(name="Project Contributor", aliases=["PC", "pc"])
+    @commands.has_any_role(*command_roles.lvl2roles)
+    async def rankup_pc(self, ctx, user: discord.Member):
+        await self.rankup_user(ctx, user, 'Project Contributor')
 
-        elif self.check(ctx.author, command_roles.lvl2roles):
-            msg = await ctx.send(f"Select the role you want to give {usr.mention}\n"
-                                 f"Select 1️⃣ for Member\nSelect 2️⃣ for Project Contributor")
-            await msg.add_reaction("1️⃣")
-            await msg.add_reaction("2️⃣")
+    @rankup.command(name="auto")
+    async def auto(self, ctx, user: discord.Member):
+        msg = await ctx.send(f"Select the role you want to give {user.mention}\n"
+                             f"Select 1️⃣ for Member\nSelect 2️⃣ for Project Contributor")
+        await msg.add_reaction("1️⃣")
+        await msg.add_reaction("2️⃣")
 
-            def check(reaction, user):
-                return user == ctx.author and str(reaction.emoji) in ["1️⃣", "2️⃣"]
+        def check(reaction, author):
+            return author == ctx.author and str(reaction.emoji) in ["1️⃣", "2️⃣"]
 
-            try:
-                reaction, user = await self.bot.wait_for('reaction_add', timeout=60.0, check=check)
-            except:
-                await msg.edit(content="Member rankup menu timed out.")
-                return
+        try:
+            reaction, author = await self.bot.wait_for('reaction_add', timeout=60.0, check=check)
+        except:
+            await msg.edit(content="Member rankup menu timed out.")
+            return
 
-            if str(reaction.emoji) == "1️⃣":
-                await self.rankup_user(ctx, usr, 'Member')
-                await msg.delete()
-            elif str(reaction.emoji) == "2️⃣":
-                await self.rankup_user(ctx, usr, 'Project Contributor')
-                await msg.delete()
+        if str(reaction.emoji) == "1️⃣":
+            await self.rankup_user(ctx, user, 'Member')
+            await msg.delete()
+        elif str(reaction.emoji) == "2️⃣":
+            await self.rankup_user(ctx, user, 'Project Contributor')
+            await msg.delete()
 
         else:
-            await self.rankup_user(ctx, usr, 'Member')
+            await self.rankup_user(ctx, user, 'Member')
 
 
 def setup(bot: Bot):
