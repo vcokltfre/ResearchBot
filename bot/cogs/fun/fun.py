@@ -8,7 +8,7 @@ from discord.utils import get
 from bot.bot import Bot
 
 rgb_people = [256251362260549632, 738981683516145785, 149322096814718987]
-h_channel = 756100804892557372
+ignore = [738029979899789315]
 
 
 class Fun(commands.Cog):
@@ -44,6 +44,8 @@ class Fun(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        if message.channel.category and message.channel.category.id in ignore:
+            return
         if message.author.id in rgb_people:
             if "rgb" in self.make_ascii(message.content.lower()):
                 await message.channel.send("RGB makes your PC faster")
