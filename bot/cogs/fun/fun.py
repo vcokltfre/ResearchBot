@@ -30,7 +30,7 @@ class Fun(commands.Cog):
     async def doyouloveme(self, ctx, *, content):
         if not content == "you love me?":
             return
-        if not ctx.author.id in [297045071457681409]:
+        if not ctx.author.id in [297045071457681409, 243233669148442624, 297045071457681409]:
             return await ctx.send(f"No, I dont love you {ctx.author.mention}")
         await ctx.send("Of course I still love you")
 
