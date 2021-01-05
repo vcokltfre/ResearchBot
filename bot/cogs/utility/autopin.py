@@ -11,7 +11,7 @@ __**Here you can propose new projects!**__
 
 __**BEFORE YOU MAKE A SUGGESTION:**__
 :book: **Check if it hasn't been suggested already.** Use Discord's search function, check <#755121689913983136>, pins or ask in <#738860957685776395> if unsure.
-:mag_right: **Gooogle it!** A lot of seeds/world downloads are already publicly known!
+:mag_right: **Google it!** A lot of seeds/world downloads are already publicly known!
 :thinking: **Consider if what you're suggesting has any significance** to the community, be it historical or technical.
 
 __**HOW TO MAKE A GOOD SUGGESTION:**__
