@@ -10,7 +10,7 @@ mess = """
 __**Here you can propose new projects!**__
 
 __**BEFORE YOU MAKE A SUGGESTION:**__
-:book: **Check if it hasn't been suggested already.** Use Discord's search function, check #projects, pins or ask in #suggestion-discussion if unsure.
+:book: **Check if it hasn't been suggested already.** Use Discord's search function, check <#755121689913983136>, pins or ask in <#738860957685776395> if unsure.
 :mag_right: **Gooogle it!** A lot of seeds/world downloads are already publicly known!
 :thinking: **Consider if what you're suggesting has any significance** to the community, be it historical or technical.
 
@@ -19,7 +19,7 @@ __**HOW TO MAKE A GOOD SUGGESTION:**__
 :white_check_mark: Try to include a link or an image (where it makes sense).
 
 :x: ***Blatant duplicates and spam will get deleted without notice!** :wastebasket:
-Otherwise you'll get notified in #suggestion-discussion if there are any problems.
+Otherwise you'll get notified in <#738860957685776395> if there are any problems.
 Repeatedly making bad suggestions will get your access to this channel removed!*
 
 
