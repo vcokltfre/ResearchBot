@@ -7,21 +7,25 @@ from pathlib import Path
 from bot.bot import Bot
 
 mess = """
-__**Here you can suggest anything we should do!**__
+__**Here you can propose new projects!**__
 
-__**BUT!** There's a few things you should consider before suggesting something:__
-:book: **Please check if it hasn't been suggested already.** Use the search function, or ask in <#738860957685776395>.
-:mag_right: A lot of seeds are already publicly known! Please look stuff up on Google before you suggest it.
-:thinking: Consider if what you're suggesting has any significance, be it historical or technical.
-:x: **Blatant duplicates and spam will get deleted without notice!** Otherwise you'll get notified in <#738860957685776395> if there are any problems.
-__Common suggestions include:__  MC Trailer (<#756961269738766527>), Herobrine picture (<#751840431595192512>) Yogscast seed (4090136037452000329), DanTDM's lab seed (5021019576385777538), and various MC renders.
-For more info, check the pinned messages, if you clearly haven't checked pinned messages and suggest something mentioned in one, your access to the suggestions channel may be removed.
+__**BEFORE YOU MAKE A SUGGESTION:**__
+:book: **Check if it hasn't been suggested already.** Use Discord's search function, check #projects, pins or ask in #suggestion-discussion if unsure.
+:mag_right: **Gooogle it!** A lot of seeds/world downloads are already publicly known!
+:thinking: **Consider if what you're suggesting has any significance** to the community, be it historical or technical.
 
-***DO NOT*** suggest the seed for the Smash Ultimate backgrounds. You will be muted.
+__**HOW TO MAKE A GOOD SUGGESTION:**__
+:white_check_mark: Explain properly what you mean and why should we be interested.
+:white_check_mark: Try to include a link or an image (where it makes sense).
 
-:warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:
-If you don't read this message, you'll be muted for a day.
-:warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning: :rotating_light: :warning:
+:x: ***Blatant duplicates and spam will get deleted without notice!** :wastebasket:
+Otherwise you'll get notified in #suggestion-discussion if there are any problems.
+Repeatedly making bad suggestions will get your access to this channel removed!*
+
+
+:warning:   :rotating_light:   :warning:   :rotating_light:   :warning:
+__Blatantly ignoring this message will get you **muted** for a day!__
+:warning:   :rotating_light:   :warning:   :rotating_light:   :warning:
 """
 
 channel = 738836486199181312
