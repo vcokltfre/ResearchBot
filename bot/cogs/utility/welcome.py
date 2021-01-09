@@ -11,7 +11,7 @@ class Welcome(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member: discord.Member):
         c = self.bot.get_channel(welcome_channel)
-        await c.send(f"Welcome {member.mention} to Minecraft@Home!", allowed_mentions=discord.AllowedMentions(users=False))
+        await c.send(f"Welcome **{member}** to Minecraft@Home!", allowed_mentions=discord.AllowedMentions(users=False))
 
 
 def setup(bot):
