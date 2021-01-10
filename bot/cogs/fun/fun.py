@@ -55,6 +55,8 @@ class Fun(commands.Cog):
         #    await message.add_reaction("🤪")
         if message.content == "@someone" and message.author.id == 297045071457681409:
             await message.channel.send(f"<@!{random.choice(message.guild.members).id}>")
+        if "doors" in message.content and not random.randint(10):
+            await message.reply("doors")
 
     @commands.Cog.listener()
     async def on_message_edit(self, before, after):
