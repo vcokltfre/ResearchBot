@@ -39,10 +39,6 @@ class Fun(commands.Cog):
         await ctx.send(random.choice(self.quotes))
 
     @commands.Cog.listener()
-    async def on_ready(self):
-        self.channel = self.bot.get_channel(h_channel)
-
-    @commands.Cog.listener()
     async def on_message(self, message):
         if message.channel.category and message.channel.category.id in ignore:
             return
