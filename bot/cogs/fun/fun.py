@@ -54,17 +54,6 @@ class Fun(commands.Cog):
         if "doors" in message.content and not random.randint(0, 5):
             await message.reply("doors")
 
-    @commands.Cog.listener()
-    async def on_message_edit(self, before, after):
-        if after.channel.id == h_channel:
-            await after.delete()
-
-    @commands.Cog.listener()
-    async def on_raw_message_edit(self, payload):
-        if payload.channel_id == h_channel:
-            mess = await self.channel.fetch_message(payload.message_id)
-            await mess.delete()
-
     @commands.command(name="muteme")
     @commands.guild_only()
     async def mute_me(self, ctx):
