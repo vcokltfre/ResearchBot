@@ -13,7 +13,7 @@ def deconstruct(snowflake: int):
     return timestamp // 1000
 
 
-class Server(commands.Cog):
+class NewAlert(commands.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
 
@@ -32,4 +32,4 @@ class Server(commands.Cog):
 
 
 def setup(bot: Bot):
-    bot.add_cog(Server(bot))
+    bot.add_cog(NewAlert(bot))
