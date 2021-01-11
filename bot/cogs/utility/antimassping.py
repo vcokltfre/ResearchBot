@@ -17,7 +17,7 @@ class AntiMassPing(commands.Cog):
             return
         muted_role = discord.utils.get(message_object.guild.roles, name="Muted")
         await message_object.author.add_roles(muted_role)
-        embed = discord.Embed(title="Mass Ping",description=f"AntiSpam has detected a mass ping from the user {message_object.author.mention}.",color=0xff0000)
+        embed = discord.Embed(title="Mass Ping",description=f"ResearchBot AMP has detected a mass ping from the user {message_object.author.mention}.",color=0xff0000)
         mention_values = ', '.join(elem.mention for elem in matches)
         if len(mention_values) > 1024:
             embed.add_field(name="1 - Pinged Users:",value=mention_values[:mention_values[:1024].rfind('>')+1])
