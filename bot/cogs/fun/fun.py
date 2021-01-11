@@ -17,12 +17,6 @@ class Fun(commands.Cog):
         self.bot = bot
         self.channel = None
 
-        try:
-            with Path("/home/vcokltfre/quotes.txt").open() as f:
-                self.quotes = [l for l in f.readlines()]
-        except:
-            self.bot.logger.warn("Failed to load quotes")
-
     def make_ascii(self, text: str):
         return ''.join([c for c in text if c in string.ascii_letters])
 
@@ -33,10 +27,6 @@ class Fun(commands.Cog):
         if not ctx.author.id in [297045071457681409, 243233669148442624, 298190347614552066]:
             return await ctx.send(f"No, I dont love you {ctx.author.mention}")
         await ctx.send("Of course I still love you")
-
-    @commands.command(name="quote")
-    async def quote(self, ctx):
-        await ctx.send(random.choice(self.quotes))
 
     @commands.Cog.listener()
     async def on_message(self, message):
