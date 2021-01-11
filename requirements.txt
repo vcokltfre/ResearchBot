@@ -11,3 +11,4 @@ googletrans
 yahoo_fin
 parsedatetime
 git+https://github.com/twoolie/NBT
+pandas
