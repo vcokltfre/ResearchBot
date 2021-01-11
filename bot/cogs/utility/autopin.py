@@ -60,7 +60,7 @@ class Autopin(commands.Cog):
             await m.delete()
 
         m = await message.channel.send(mess)
-        
+
         with self.p.open('w') as f:
             f.write(str(m.id))
         self.mid = m.id
