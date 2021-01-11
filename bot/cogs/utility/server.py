@@ -14,7 +14,7 @@ suggest_file = "./tmp/suggestions.json"
 
 
 class Server(commands.Cog):
-    """"""
+    """A cog for server related utilities"""
 
     def __init__(self, bot: Bot):
         self.bot = bot
