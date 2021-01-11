@@ -3,7 +3,6 @@ from discord.ext import commands
 
 from bot.bot import Bot
 from bot.utils.checks import is_dev
-from config.config import guild
 
 
 class Status(commands.Cog):
@@ -12,7 +11,7 @@ class Status(commands.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
         self.guild = None
-        
+
         if bot.cfg.has_attr("status_updates"):
             self.enabled = bot.cfg.get_attr("status_updates")
         else:

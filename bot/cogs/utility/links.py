@@ -1,7 +1,6 @@
 import pyourls3
 import whois
 import discord
-import re
 from discord.ext import commands
 
 from bot.bot import Bot

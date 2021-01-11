@@ -21,7 +21,7 @@ class Server(commands.Cog):
     async def on_member_join(self, member: discord.Member):
         jt = deconstruct(member.id)
         dt = int(time()) - jt
-        
+
         if dt < WEEK:
             ch = self.bot.get_channel(ACH)
             s = dt % 60

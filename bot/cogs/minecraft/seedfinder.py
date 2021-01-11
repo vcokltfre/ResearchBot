@@ -1,4 +1,3 @@
-import discord
 import nbt
 import requests
 from pathlib import Path

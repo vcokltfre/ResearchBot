@@ -1,4 +1,3 @@
-import discord
 from yahoo_fin.stock_info import get_live_price
 from discord.ext import commands
 
