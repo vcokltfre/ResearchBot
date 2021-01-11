@@ -1,7 +1,6 @@
 import string
 import random
 from discord.ext import commands
-from discord.utils import get
 
 from bot.bot import Bot
 
@@ -13,7 +12,6 @@ class Fun(commands.Cog):
 
     def __init__(self, bot: Bot):
         self.bot = bot
-        self.channel = None
 
     def make_ascii(self, text: str):
         return ''.join([c for c in text if c in string.ascii_letters])
