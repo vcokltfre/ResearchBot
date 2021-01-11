@@ -1,5 +1,3 @@
-from datetime import time
-import discord
 import random
 from discord.ext import commands
 
@@ -30,7 +28,6 @@ class Random(commands.Cog):
             data = conf[key]
             if message.author.id == data['a'] and random.randint(0,data['c']) == data['n']:
                 await message.channel.send(data['d'])
-
 
 
 def setup(bot: Bot):
