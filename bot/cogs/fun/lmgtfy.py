@@ -1,4 +1,3 @@
-import discord
 import re
 import random
 from discord.ext import commands
