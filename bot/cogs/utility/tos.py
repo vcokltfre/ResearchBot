@@ -5,7 +5,7 @@ from bot.bot import Bot
 from bot.utils.config import ConfigUtil
 
 
-class Status(commands.Cog):
+class TOS(commands.Cog):
     """A cog for showing the terms and guidelines"""
 
     def __init__(self, bot: Bot):
@@ -37,4 +37,4 @@ class Status(commands.Cog):
 
 
 def setup(bot: Bot):
-    bot.add_cog(Status(bot))
+    bot.add_cog(TOS(bot))
