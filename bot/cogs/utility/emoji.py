@@ -24,14 +24,14 @@ class Emoji(commands.Cog):
     async def on_message(self, message):
         if self.is_exempt(message.author):
             return
-        if len(self.emoji.findall(message.content)) > 16:
+        if len(self.emoji.findall(message.content)) > 20:
             await message.delete()
 
     @commands.Cog.listener()
     async def on_message_edit(self, before, after):
         if self.is_exempt(after.author):
             return
-        if len(self.emoji.findall(after.content)) > 16:
+        if len(self.emoji.findall(after.content)) > 20:
             await after.delete()
 
 
