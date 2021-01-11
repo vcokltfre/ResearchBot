@@ -54,13 +54,6 @@ class Fun(commands.Cog):
         if "doors" in message.content and not random.randint(0, 5):
             await message.reply("doors")
 
-    @commands.command(name="muteme")
-    @commands.guild_only()
-    async def mute_me(self, ctx):
-        mr = get(ctx.guild.roles, name="Muted")
-        await ctx.author.add_roles(mr)
-        await ctx.send("Okie")
-
 
 def setup(bot: Bot):
     bot.add_cog(Fun(bot))
