@@ -28,5 +28,5 @@ nick_request_channel_id = channel_id
 nick_accept_channel_id = channel_id
 
 yourlspw="your yourls password" #You probably dont want this, so you may want to comment out the line that says "bot.cogs.utility.links" in main.py
-welcome_channel = 1234
+welcome_channel = welcome_channel_id
 ```
