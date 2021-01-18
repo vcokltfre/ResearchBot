@@ -160,6 +160,12 @@ class General(commands.Cog):
         sc = ensure_length(str(t.tm_sec), 2)
         await ctx.send(f"{y}:{mo}:{d}@{h}:{mi}:{sc}")
 
+    @commands.command(name="perminv")
+    @commands.has_any_role("Administrator")
+    async def perminv(self, ctx: commands.Context):
+        inv = await ctx.channel.create_invite(unique=True)
+        await ctx.author.send(f"Invite created! <{str(inv)}>")
+
 
 def setup(bot: Bot):
     bot.add_cog(General(bot))
