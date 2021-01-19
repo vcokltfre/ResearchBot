@@ -162,8 +162,8 @@ class General(commands.Cog):
 
     @commands.command(name="perminv")
     @commands.has_any_role("Administrator")
-    async def perminv(self, ctx: commands.Context):
-        inv = await ctx.channel.create_invite(unique=True)
+    async def perminv(self, ctx: commands.Context, channel: discord.TextChannel):
+        inv = await channel.create_invite(unique=True)
         await ctx.author.send(f"Invite created! <{str(inv)}>")
 
 
