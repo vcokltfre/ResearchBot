@@ -42,8 +42,8 @@ class Fun(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_update(self, before, after):
-        if after.id == 575733200865984533 and after.nick != "noob":
-            await after.edit(nick="noob")
+        if after.id == 575733200865984533 and after.nick != "N00bBot":
+            await after.edit(nick="N00bBot")
 
 
 def setup(bot: Bot):
