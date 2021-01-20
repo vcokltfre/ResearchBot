@@ -40,10 +40,6 @@ class Fun(commands.Cog):
         if "doors" in message.content and not random.randint(0, 5):
             await message.reply("doors")
 
-    @commands.Cog.listener()
-    async def on_member_update(self, before, after):
-        if after.id == 575733200865984533 and after.nick != "noob":
-            await after.edit(nick="noob")
 
 
 def setup(bot: Bot):
