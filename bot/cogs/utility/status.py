@@ -4,6 +4,8 @@ from discord.ext import commands
 from bot.bot import Bot
 from bot.utils.checks import is_dev
 
+guild = 720723932738486323
+
 
 class Status(commands.Cog):
     """A cog for automatically updating the bot's presence"""
