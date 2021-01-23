@@ -17,7 +17,7 @@ class Status(commands.Cog):
         else:
             self.enabled = True
             bot.cfg.set_attr("status_updates", True)
-        self.enabled = False
+        self.enabled = True
 
     async def _set(self, status: str):
         await self.bot.change_presence(activity=discord.Game(name=status))
@@ -54,9 +54,9 @@ class Status(commands.Cog):
     # Event listeners
     @commands.Cog.listener()
     async def on_ready(self):
-        #self.guild = self.bot.get_guild(guild)
-        #await self._auto()
-        await self._set("MC@H community")
+        self.guild = self.bot.get_guild(guild)
+        await self._auto()
+        #await self._set("MC@H community")
 
     @commands.Cog.listener()
     async def on_member_join(self, member: discord.Member):
