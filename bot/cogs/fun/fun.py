@@ -24,6 +24,11 @@ class Fun(commands.Cog):
             return await ctx.send(f"No, I dont love you {ctx.author.mention}")
         await ctx.send("Of course I still love you")
 
+    @commands.command(name="terminal")
+    async def term(self, ctx):
+        if ctx.author.id != 297045071457681409:
+            return await ctx.send("Lol, no.")
+
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.channel.category and message.channel.category.id in ignore:
