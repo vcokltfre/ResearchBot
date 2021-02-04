@@ -20,11 +20,6 @@ __**HOW TO MAKE A GOOD SUGGESTION:**__
 :x: ***Blatant duplicates and spam will get deleted without notice!** :wastebasket:
 Otherwise you'll get notified in <#738860957685776395> if there are any problems.
 Repeatedly making bad suggestions will get your access to this channel removed!*
-
-
-:warning:   :rotating_light:   :warning:   :rotating_light:   :warning:
-__Blatantly ignoring this message will get you **muted** for a day!__
-:warning:   :rotating_light:   :warning:   :rotating_light:   :warning:
 """
 
 channel = 738836486199181312
