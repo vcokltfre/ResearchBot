@@ -16,7 +16,7 @@ class Stonks(commands.Cog):
 
     @commands.command(name="stonks")
     async def stonk_cmd(self, ctx, ticker='nvda'):
-        await ctx.send(f"Stonks for {ticker.upper()}: ${round(get_live_price(ticker), 3) if not ticker == 'vco' else 99999}")
+        pass#await ctx.send(f"Stonks for {ticker.upper()}: ${round(get_live_price(ticker), 3) if not ticker == 'vco' else 99999}")
 
     @commands.command(name="stonkwatch")
     async def stonkwatch(self, ctx, ticker='gme', interval: int = 5, reps: int = 500):
